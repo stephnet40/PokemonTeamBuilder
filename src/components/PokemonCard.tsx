@@ -1,11 +1,13 @@
 import { Pokemon } from "pokenode-ts";
 
 const PokemonCard = ({pokemon}: {pokemon: Pokemon}) => {
+
     if (pokemon) {
+        const imgSrc = pokemon.sprites.front_default!
         return (
             <div>
                 <h3>{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
-                <p>Test Test Test</p>
+                <img src={imgSrc}></img>
             </div>
             );
     }
