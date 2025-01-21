@@ -24,7 +24,7 @@ const RandomGenerateButton = ({generatePokemon: generatePokemon} : {generatePoke
     }
     
     return (
-        <button onClick={() => generateRandomNums(1, 1000)}>Generate Random Team</button>
+        <button onClick={() => generateRandomNums(1, 1025)}>Generate Random Team</button>
     )
 }
 
