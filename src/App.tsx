@@ -2,18 +2,19 @@ import { useState } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard'
 import RandomGenerateButton from './components/RandomGenerateButton'
+import { Pokemon } from 'pokenode-ts';
 
 function App() {
-  const [pokemonArr, setArr] = useState([NaN,NaN,NaN,NaN,NaN,NaN]);
-
+  const [pokemon, setIds] = useState<Pokemon[]>(new Array(6).fill(null));
   const generatePokemon = (data: any) => {
-    setArr(data)
+    setIds(data);
   }
+
   return (
     <>
     <RandomGenerateButton generatePokemon={generatePokemon}/>
     <div className='pokemon-cards'>
-      {pokemonArr.map((item, index) => <PokemonCard key={index} name={item} />)}
+      {pokemon.map((item: any, index: any) => <PokemonCard key={index} pokemon={item} />)}
     </div>
     </>
   )

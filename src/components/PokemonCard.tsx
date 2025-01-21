@@ -1,8 +1,10 @@
-const PokemonCard = ({name}: {name: number}) => {
-    if (name) {
+import { Pokemon } from "pokenode-ts";
+
+const PokemonCard = ({pokemon}: {pokemon: Pokemon}) => {
+    if (pokemon) {
         return (
             <div>
-                <h3>{name}</h3>
+                <h3>{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
                 <p>Test Test Test</p>
             </div>
             );
