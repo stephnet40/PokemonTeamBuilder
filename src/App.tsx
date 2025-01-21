@@ -1,33 +1,20 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import PokemonCard from './components/PokemonCard'
+import RandomGenerateButton from './components/RandomGenerateButton'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [pokemonArr, setArr] = useState([NaN,NaN,NaN,NaN,NaN,NaN]);
 
+  const generatePokemon = (data: any) => {
+    setArr(data)
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <RandomGenerateButton generatePokemon={generatePokemon}/>
+    <div className='pokemon-cards'>
+      {pokemonArr.map((item, index) => <PokemonCard key={index} name={item} />)}
+    </div>
     </>
   )
 }
