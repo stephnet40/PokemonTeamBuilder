@@ -1,6 +1,6 @@
 import { Pokemon } from "pokenode-ts";
+import './PokemonCard.css';
 import RandomGenerateIndividualButton from "./RandomGenerateIndividualButton";
-import { useEffect, useState } from "react";
 
 const PokemonCard = ({pokemon, setPokemon}: {pokemon: Pokemon, setPokemon: any}) => {
 
@@ -9,15 +9,17 @@ const PokemonCard = ({pokemon, setPokemon}: {pokemon: Pokemon, setPokemon: any})
     }
 
     if (pokemon) {
+        let typesImgSrc = [];
         const pokemonTypes = pokemon.types.map(item => item.type.name);
+        typesImgSrc = pokemonTypes.map(type => `typeIcons/${type}.png`);
         const imgSrc = pokemon.sprites.front_default!
 
         return (
             <div>
                 <h3>{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
 
-                <div>{pokemonTypes.map(type => <span>{type}</span>)}</div>
-                
+                <div className="type-list">{typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}</div>
+
                 <img src={imgSrc}></img>
                 <RandomGenerateIndividualButton generateNewPokemon={generateNewPokemon}/>
             </div>

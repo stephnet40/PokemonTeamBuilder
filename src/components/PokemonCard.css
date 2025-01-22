@@ -1,0 +1,10 @@
+.type-list {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.type-list img {
+    width: 70px;
+}
