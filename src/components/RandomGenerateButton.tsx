@@ -12,8 +12,6 @@ const RandomGenerateButton = ({generatePokemon: generatePokemon} : {generatePoke
         getData(numbers);
     }
 
-
-
     const getData = async (num: number[]) => {
         const api = new PokemonClient();
         const responses = await Promise.all(
