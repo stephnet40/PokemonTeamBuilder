@@ -1,0 +1,15 @@
+#game-select {
+    width: 90%;
+    margin: 0 auto 40px;
+}
+
+#games {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+#game-select div {
+    margin: 5px 15px;
+}
