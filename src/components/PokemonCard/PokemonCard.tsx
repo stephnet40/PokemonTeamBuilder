@@ -1,6 +1,6 @@
 import { Pokemon } from "pokenode-ts";
 import './PokemonCard.css';
-import RandomGenerateIndividualButton from "./RandomGenerateIndividualButton";
+import RandomGenerateIndividualButton from "../RandomGenerateIndividualButton";
 
 const PokemonCard = ({pokemon, setPokemon}: {pokemon: Pokemon, setPokemon: any}) => {
 
@@ -9,9 +9,8 @@ const PokemonCard = ({pokemon, setPokemon}: {pokemon: Pokemon, setPokemon: any})
     }
 
     if (pokemon) {
-        let typesImgSrc = [];
         const pokemonTypes = pokemon.types.map(item => item.type.name);
-        typesImgSrc = pokemonTypes.map(type => `typeIcons/${type}.png`);
+        const typesImgSrc = pokemonTypes.map(type => `typeIcons/${type}.png`);
         const imgSrc = pokemon.sprites.front_default!
 
         return (
@@ -28,7 +27,7 @@ const PokemonCard = ({pokemon, setPokemon}: {pokemon: Pokemon, setPokemon: any})
     return (
         <div>
             <h3>Empty</h3>
-            <p>Test Test Test</p>
+            <RandomGenerateIndividualButton generateNewPokemon={generateNewPokemon}/>
         </div>
     )
 }
