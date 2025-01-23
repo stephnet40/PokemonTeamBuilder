@@ -1,6 +1,6 @@
-import { PokemonClient } from "pokenode-ts";
+import { PokemonClient, PokemonEntry } from "pokenode-ts";
 
-const RandomGenerateButton = ({generatePokemon: generatePokemon} : {generatePokemon: any}) => {
+const RandomGenerateButton = ({allPokemon, generatePokemon: generatePokemon} : {allPokemon: PokemonEntry[], generatePokemon: any}) => {
     function generateRandomNums(min: number, max: number) {
         const numbers = [];
         for (let i = 0; i < 6; i++) {
