@@ -5,11 +5,11 @@ import { useState } from 'react'
 const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loadedDexes: Pokedex[], updateLoadedDexes: any, getSelectedDex: any}) => {
 
     const gameList = [
-        ["2", "Red, Blue & Yellow"], ["3", "Gold, Silver & Crystal"], ["4", "Ruby, Sapphire & Emerald"], ["2", "FireRed & LeafGreen"], 
+        ["2", "Red, Blue & Yellow"], ["3", "Gold, Silver & Crystal"], ["4", "Ruby, Sapphire & Emerald"], ["40", "FireRed & LeafGreen"], 
         ["5", "Diamond & Pearl"], ["6", "Platinum"], ["7", "HeartGold & SoulSilver"], ["8", "Black & White"], 
         ["9", "Black 2 & White 2"], ["12", "X & Y"], ["15", "Omega Ruby & Alpha Sapphire"], ["16", "Sun & Moon"], 
         ["21", "Ultra Sun & Ultra Moon"], ["26", "Let's Go Pikachu & Let's Go Eevee"], ["27", "Sword & Shield"], 
-        ["5", "Brilliant Diamond & Shining Pearl"], ["30", "Pokemon Legends Arceus"], ["31", "Scarlet & Violet"]
+        ["41", "Brilliant Diamond & Shining Pearl"], ["30", "Pokemon Legends Arceus"], ["31", "Scarlet & Violet"]
     ]
 
     const [selectedGame, setSelectedGame] = useState("1");
@@ -19,6 +19,10 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
     }
 
     function getSelectedPokedex(id: any) {
+        if (id == 40 || id == 41) {
+            id = id == 40 ? 2 : 5;
+        }
+        
         if (loadedDexes.some(x => x.id == id)) {
             let pokedex = loadedDexes.find(x => x.id == id)?.pokemon_entries;
             if (id == 12 || id == 27 || id == 31) {
