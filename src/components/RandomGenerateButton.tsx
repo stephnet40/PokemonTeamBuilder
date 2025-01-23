@@ -9,17 +9,20 @@ const RandomGenerateButton = ({selectedDex, generatePokemon: generatePokemon} : 
             const num = Math.floor(Math.random() * (maxNum - 1) + 1) - 1
             names.push(selectedDex[num].pokemon_species.name); 
         }
-        
+
         getData(names);
     }
 
     const getData = async (names: string[]) => {
         const api = new PokemonClient();
         const responses = await Promise.all(
-            names.map(name => api.getPokemonByName(name).then(data => data))
+            names.map(name => api.getPokemonSpeciesByName(name).then(data => data))
+        );
+        const pokemon = await Promise.all(
+            responses.map(response => api.getPokemonById(response.id).then(data => data))
         );
 
-        generatePokemon(responses);
+        generatePokemon(pokemon);
     }
     
     return (

@@ -11,8 +11,9 @@ const RandomGenerateIndividualButton = ({selectedDex, generateNewPokemon: genera
 
     const getData = async (name: string) => {
         const api = new PokemonClient();
-        const response = await api.getPokemonByName(name).then(data => data)
-        generateNewPokemon(response);
+        const response = await api.getPokemonSpeciesByName(name).then(data => data);
+        const pokemon = await api.getPokemonById(response.id).then(data => data);
+        generateNewPokemon(pokemon);
     }
     
     return (

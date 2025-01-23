@@ -20,8 +20,14 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
 
     function getSelectedPokedex(id: any) {
         if (loadedDexes.some(x => x.id == id)) {
-            const pokedex = loadedDexes.find(x => x.id == id);
-            getSelectedDex(pokedex?.pokemon_entries)
+            let pokedex = loadedDexes.find(x => x.id == id)?.pokemon_entries;
+            if (id == 12 || id == 27 || id == 31) {
+                const pokedex2 = loadedDexes.find(x => x.id == id + 1)?.pokemon_entries;
+                const pokedex3 = loadedDexes.find(x => x.id == id + 2)?.pokemon_entries;
+                pokedex = pokedex?.concat(pokedex2!, pokedex3!);
+            }     
+
+            getSelectedDex(pokedex)
         } else {
             getPokedexData(parseInt(id));
         }
@@ -31,11 +37,23 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
         const api = new GameClient();
         const response = await api.getPokedexById(id).then(data => data);
 
+        let pokedex = response.pokemon_entries;
+
         let newLoaded = loadedDexes;
         newLoaded.push(response);
+
+        if (id == 12 || id == 27 || id == 31) {
+            const response2 = await api.getPokedexById(id + 1).then(data => data);
+            const response3 = await api.getPokedexById(id + 2).then(data => data);
+
+            newLoaded.push(response2);
+            newLoaded.push(response3);
+
+            pokedex = pokedex.concat(response2.pokemon_entries, response3.pokemon_entries);
+        }
         updateLoadedDexes(newLoaded);
-        
-        getSelectedDex(response.pokemon_entries)
+
+        getSelectedDex(pokedex);
     }
     
     return (
