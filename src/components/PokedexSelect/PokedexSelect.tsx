@@ -22,13 +22,13 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
         if (id == 40 || id == 41) {
             id = id == 40 ? 2 : 5;
         }
-        
+
         if (loadedDexes.some(x => x.id == id)) {
             let pokedex = loadedDexes.find(x => x.id == id)?.pokemon_entries;
             if (id == 12 || id == 27 || id == 31) {
                 const pokedex2 = loadedDexes.find(x => x.id == id + 1)?.pokemon_entries;
                 const pokedex3 = loadedDexes.find(x => x.id == id + 2)?.pokemon_entries;
-                pokedex = pokedex?.concat(pokedex2!, pokedex3!);
+                pokedex = Array.from(new Set(pokedex?.concat(pokedex2!, pokedex3!)));
             }     
 
             getSelectedDex(pokedex)
@@ -53,7 +53,7 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
             newLoaded.push(response2);
             newLoaded.push(response3);
 
-            pokedex = pokedex.concat(response2.pokemon_entries, response3.pokemon_entries);
+            pokedex = Array.from(new Set(pokedex.concat(response2.pokemon_entries, response3.pokemon_entries)));
         }
         updateLoadedDexes(newLoaded);
 
