@@ -1,23 +1,22 @@
-import { PokemonClient } from "pokenode-ts";
+import { PokemonClient, PokemonEntry } from "pokenode-ts";
 
-const RandomGenerateIndividualButton = ({generateNewPokemon: generateNewPokemon} : {generateNewPokemon: any}) => {
-    function generateRandomNum(min: number, max: number) {
-        let number: number;
-        const minCeiled = Math.ceil(min);
-        const maxFloored = Math.floor(max);
-        number = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); 
-        
-        getData(number);
+const RandomGenerateIndividualButton = ({selectedDex, generateNewPokemon: generateNewPokemon} : {selectedDex: PokemonEntry[], generateNewPokemon: any}) => {
+    function generateRandomNum() {
+        const maxNum = selectedDex.length;
+        const num = Math.floor(Math.random() * (maxNum - 1) + 1) - 1; 
+        const name = selectedDex[num].pokemon_species.name;
+
+        getData(name);
     }
 
-    const getData = async (num: number) => {
+    const getData = async (name: string) => {
         const api = new PokemonClient();
-        const response = await api.getPokemonById(num).then(data => data)
+        const response = await api.getPokemonByName(name).then(data => data)
         generateNewPokemon(response);
     }
     
     return (
-        <button onClick={() => generateRandomNum(1, 1025)}>Randomize</button>
+        <button onClick={() => generateRandomNum()}>Randomize</button>
     )
 }
 
