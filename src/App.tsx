@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard/PokemonCard'
 import RandomGenerateButton from './components/RandomGenerateButton'
-import { GameClient, Pokedex, Pokemon, PokemonClient, PokemonEntry } from 'pokenode-ts';
+import { GameClient, Pokedex, Pokemon, PokemonEntry } from 'pokenode-ts';
 import PokedexSelect from './components/PokedexSelect/PokedexSelect';
 
 function App() {

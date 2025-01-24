@@ -1,0 +1,31 @@
+.pokemon-cards {
+    display: grid;
+    grid-template-columns: 50% 50% ;
+    gap: 20px;
+  }
+
+.container {
+    display: grid;
+    grid-template-columns: 15% 80%;
+    gap: 10px;
+    border: 2px solid white;
+    padding: 10px;
+}
+
+.name {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+}
+
+.type-list {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.type-list img {
+    width: 70px;
+}
+
