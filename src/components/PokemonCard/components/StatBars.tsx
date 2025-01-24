@@ -1,5 +1,5 @@
 import { PokemonStat } from "pokenode-ts";
-import "./css/StatBars.css"
+import "../css/StatBars.css"
 
 const StatBars = ({statsArr} : {statsArr: PokemonStat[]}) => {
 

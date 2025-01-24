@@ -1,4 +1,6 @@
 .pokemon-cards {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 50% 50% ;
     gap: 20px;

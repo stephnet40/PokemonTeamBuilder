@@ -1,4 +1,3 @@
-import axios from "axios";
 import { PokemonClient, PokemonEntry } from "pokenode-ts";
 
 const RandomGenerateIndividualButton = ({selectedDex, generateNewPokemon: generateNewPokemon} : {selectedDex: PokemonEntry[], generateNewPokemon: any}) => {

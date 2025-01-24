@@ -1,13 +1,19 @@
 import { Pokemon, PokemonEntry } from "pokenode-ts";
 import './css/PokemonCard.css';
-import RandomGenerateIndividualButton from "./RandomGenerateIndividualButton";
-import StatBars from "./StatBars";
+import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
+import StatBars from "./components/StatBars";
+import { useState } from "react";
+import SelectPokemonModal from "./components/SelectPokemonModal";
 
 const PokemonCard = ({pokemon, selectedDex, setPokemon}: {pokemon: Pokemon, selectedDex: PokemonEntry[], setPokemon: any}) => {
 
+    const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
+    
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
     }
+
+    
 
     if (pokemon) {
         const pokemonStats = pokemon.stats;
@@ -21,6 +27,9 @@ const PokemonCard = ({pokemon, selectedDex, setPokemon}: {pokemon: Pokemon, sele
                 <img src={imgSrc}></img>
 
                 <div className="info">
+                    <button onClick={() => setSelectPokemonModalOpen(true)}>Select Pokemon</button>
+                    <SelectPokemonModal isOpen={selectPokemonModalOpen} pokedex={selectedDex} onSubmit={generateNewPokemon} onClose={() => setSelectPokemonModalOpen(false)}/>
+                    
                     <RandomGenerateIndividualButton selectedDex={selectedDex} generateNewPokemon={generateNewPokemon}/>
 
                     <div className="name">
@@ -36,6 +45,8 @@ const PokemonCard = ({pokemon, selectedDex, setPokemon}: {pokemon: Pokemon, sele
     }
     return (
         <div>
+            <button onClick={() => setSelectPokemonModalOpen(true)}>Select Pokemon</button>
+            <SelectPokemonModal isOpen={selectPokemonModalOpen} pokedex={selectedDex} onSubmit={generateNewPokemon} onClose={() => setSelectPokemonModalOpen(false)}/>
             <RandomGenerateIndividualButton selectedDex={selectedDex} generateNewPokemon={generateNewPokemon}/>
             <h3>Empty</h3>
         </div>

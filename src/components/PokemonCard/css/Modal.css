@@ -1,0 +1,21 @@
+dialog {
+    position: relative;
+    z-index: 2;
+    width: 70%;
+}
+
+.default {
+    text-align: center;
+}
+
+.select-pokemon {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.select-pokemon select {
+    width: 100%;
+}

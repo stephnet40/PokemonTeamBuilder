@@ -31,7 +31,7 @@ function App() {
       }
       getNationalDex(); 
   }, [])
-  
+  console.log(selectedDex)
   return (
     <>
     <PokedexSelect loadedDexes={loadedDexes} updateLoadedDexes={updateLoadedDexes} getSelectedDex={getSelectedDex}/>

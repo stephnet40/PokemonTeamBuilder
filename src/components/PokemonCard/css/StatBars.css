@@ -1,6 +1,6 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 25% 65% 10%;
+    grid-template-columns: 25% 60% 10%;
     gap: 5px;
     align-items: center;
 }
