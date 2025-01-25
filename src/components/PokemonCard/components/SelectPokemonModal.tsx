@@ -2,6 +2,7 @@ import { PokemonClient, PokemonEntry } from "pokenode-ts";
 import Modal from "../modals/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
+import { PokemonInfo } from "../../interfaces";
 
 interface SelectPokemonModalProps {
     isOpen: boolean;
@@ -55,10 +56,16 @@ const SelectPokemonModal = ({isOpen, pokedex, onSubmit, onClose}: SelectPokemonM
 
     const getData = async (name: string | undefined) => {
         const api = new PokemonClient();
-        const response = await api.getPokemonSpeciesByName(name!).then(data => data);
-        const pokemon = await api.getPokemonById(response.id).then(data => data);
+        const species = await api.getPokemonSpeciesByName(name!).then(data => data);
+        const pokemon = await api.getPokemonById(species.id).then(data => data);
 
-        onSubmit(pokemon);
+        const pokemonInfo = {
+            name: name,
+            species: species,
+            pokemon: pokemon
+        } as PokemonInfo;
+
+        onSubmit(pokemonInfo);
         handleClose();
     }
 

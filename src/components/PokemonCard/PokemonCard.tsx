@@ -4,18 +4,20 @@ import RandomGenerateIndividualButton from "./components/RandomGenerateIndividua
 import StatBars from "./components/StatBars";
 import { useState } from "react";
 import SelectPokemonModal from "./components/SelectPokemonModal";
+import { PokemonInfo } from "../interfaces";
 
-const PokemonCard = ({pokemon, selectedDex, setPokemon}: {pokemon: Pokemon, selectedDex: PokemonEntry[], setPokemon: any}) => {
+const PokemonCard = ({pokemonInfo, selectedDex, setPokemon}: {pokemonInfo: PokemonInfo, selectedDex: PokemonEntry[], setPokemon: any}) => {
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
     
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
-    }
+    } 
 
-    
+    if (pokemonInfo) {
+        const species = pokemonInfo.species;
+        const pokemon = pokemonInfo.pokemon;
 
-    if (pokemon) {
         const pokemonStats = pokemon.stats;
         
         const pokemonTypes = pokemon.types.map(item => item.type.name);

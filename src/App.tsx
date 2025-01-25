@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard/PokemonCard'
 import RandomGenerateButton from './components/RandomGenerateButton'
-import { GameClient, Pokedex, Pokemon, PokemonEntry } from 'pokenode-ts';
+import { Ability, GameClient, Pokedex, Pokemon, PokemonEntry, PokemonShape } from 'pokenode-ts';
 import PokedexSelect from './components/PokedexSelect/PokedexSelect';
+import { PokemonInfo } from './components/interfaces';
 
 function App() {
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>(new Array(6).fill(null));
+  const [pokemonList, setPokemonList] = useState<PokemonInfo[]>(new Array(6).fill(null));
   const generatePokemon = (data: any) => {
     setPokemonList(data);
   }
@@ -29,18 +30,18 @@ function App() {
         setLoadedDexes(loadedDexes);
         setSelectedDex(response.pokemon_entries);
       }
-      getNationalDex(); 
+      getNationalDex();
   }, [])
-  console.log(selectedDex)
+
   return (
     <>
     <PokedexSelect loadedDexes={loadedDexes} updateLoadedDexes={updateLoadedDexes} getSelectedDex={getSelectedDex}/>
     <RandomGenerateButton selectedDex={selectedDex!} generatePokemon={generatePokemon}/>
     <div className='pokemon-cards'>
-      {pokemonList.map((item: Pokemon, index: any) => {
-        const [pokemon, setPokemon] = useState<Pokemon>(item);
+      {pokemonList.map((item: PokemonInfo, index: any) => {
+        const [pokemon, setPokemon] = useState<PokemonInfo>(item);
         useEffect(() => {setPokemon(item)}, [item])
-        return <PokemonCard key={index} pokemon={pokemon} selectedDex={selectedDex!} setPokemon={setPokemon} />
+        return <PokemonCard key={index} pokemonInfo={pokemon} selectedDex={selectedDex!} setPokemon={setPokemon} />
       })}
     </div>
     </>

@@ -1,4 +1,5 @@
 import { PokemonClient, PokemonEntry } from "pokenode-ts";
+import { PokemonInfo } from "./interfaces";
 
 const RandomGenerateButton = ({selectedDex, generatePokemon: generatePokemon} : {selectedDex: PokemonEntry[], generatePokemon: any}) => {
     
@@ -15,14 +16,24 @@ const RandomGenerateButton = ({selectedDex, generatePokemon: generatePokemon} : 
 
     const getData = async (names: string[]) => {
         const api = new PokemonClient();
-        const responses = await Promise.all(
+        const pokemonInfo: PokemonInfo[] = [];
+        const species = await Promise.all(
             names.map(name => api.getPokemonSpeciesByName(name).then(data => data))
         );
         const pokemon = await Promise.all(
-            responses.map(response => api.getPokemonById(response.id).then(data => data))
+            species.map(response => api.getPokemonById(response.id).then(data => data))
         );
 
-        generatePokemon(pokemon);
+        species.forEach((item, ind) => {
+            const info = {
+                name: names[ind],
+                species: item,
+                pokemon: pokemon[ind]
+            } as PokemonInfo;
+            pokemonInfo.push(info)
+        })
+
+        generatePokemon(pokemonInfo);
     }
     
     return (
