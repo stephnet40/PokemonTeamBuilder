@@ -7,11 +7,13 @@ import { PokemonInfo } from "../../interfaces";
 interface SelectPokemonModalProps {
     isOpen: boolean;
     pokedex?: PokemonEntry[];
+    loadedPokemon: PokemonInfo[];
+    updateLoadedPokemon: (data: any) => void;
     onSubmit: (data: any) => void;
     onClose: () => void;
 }
 
-const SelectPokemonModal = ({isOpen, pokedex, onSubmit, onClose}: SelectPokemonModalProps) => {
+const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon, onSubmit, onClose}: SelectPokemonModalProps) => {
     
     const handleClose = () => {
         onClose();
@@ -55,16 +57,22 @@ const SelectPokemonModal = ({isOpen, pokedex, onSubmit, onClose}: SelectPokemonM
     }
 
     const getData = async (name: string | undefined) => {
-        const api = new PokemonClient();
-        const species = await api.getPokemonSpeciesByName(name!).then(data => data);
-        const pokemon = await api.getPokemonById(species.id).then(data => data);
+        let pokemonInfo;
 
-        const pokemonInfo = {
-            name: name,
-            species: species,
-            pokemon: pokemon
-        } as PokemonInfo;
+        if (loadedPokemon.some(x => x.name == name)) {
+            pokemonInfo = loadedPokemon.find(x => x.name == name);
+        } else {
+            const api = new PokemonClient();
+            const species = await api.getPokemonSpeciesByName(name!).then(data => data);
+            const pokemon = await api.getPokemonById(species.id).then(data => data);
 
+            pokemonInfo = {
+                name: name,
+                species: species,
+                pokemon: pokemon
+            } as PokemonInfo;
+        }
+        
         onSubmit(pokemonInfo);
         handleClose();
     }
