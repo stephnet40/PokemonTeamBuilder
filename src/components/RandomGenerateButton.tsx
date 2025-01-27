@@ -23,7 +23,7 @@ const RandomGenerateButton = ({selectedDex, generatePokemon: generatePokemon} : 
         const pokemon = await Promise.all(
             species.map(response => api.getPokemonById(response.id).then(data => data))
         );
-
+        
         species.forEach((item, ind) => {
             const info = {
                 name: names[ind],
@@ -35,6 +35,7 @@ const RandomGenerateButton = ({selectedDex, generatePokemon: generatePokemon} : 
 
         generatePokemon(pokemonInfo);
     }
+
     
     return (
         <button onClick={() => generateRandomNums()}>Generate Random Team</button>

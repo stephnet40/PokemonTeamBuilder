@@ -1,22 +1,51 @@
-import { Pokemon, PokemonEntry } from "pokenode-ts";
+import { Pokemon, PokemonClient, PokemonEntry, PokemonSpecies } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";
 import { useState } from "react";
 import SelectPokemonModal from "./components/SelectPokemonModal";
 import { PokemonInfo } from "../interfaces";
+import SelectFormModal from "./components/SelectFormModal";
 
 const PokemonCard = ({pokemonInfo, selectedDex, setPokemon}: {pokemonInfo: PokemonInfo, selectedDex: PokemonEntry[], setPokemon: any}) => {
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
+    const [selectFormModalOpen, setSelectFormModalOpen] = useState<boolean>(false);
     
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
     } 
 
+    const getVarieties = async (species: PokemonSpecies, defaultPokemon: Pokemon) => {
+        const api = new PokemonClient();
+        const varieties = species.varieties.filter(x => !x.is_default);
+        let varietyList: Pokemon[] = [];
+        
+        if (varieties) {
+            varietyList = await Promise.all(
+                varieties.map(variety => api.getPokemonByName(variety.pokemon.name).then(data => data))
+            );
+        }
+        
+        varietyList.unshift(defaultPokemon);
+
+        const info = {
+            name: species.name,
+            species: species,
+            pokemon: varietyList.find(x => x.is_default),
+            varieties: varietyList
+        } as PokemonInfo;
+
+        setPokemon(info);
+    } 
+
     if (pokemonInfo) {
         const species = pokemonInfo.species;
         const pokemon = pokemonInfo.pokemon;
+
+        if (!pokemonInfo.varieties) {
+            getVarieties(species, pokemon);
+        }  
 
         const pokemonStats = pokemon.stats;
         
@@ -26,8 +55,17 @@ const PokemonCard = ({pokemonInfo, selectedDex, setPokemon}: {pokemonInfo: Pokem
 
         return (
             <div className="container">
-                <img src={imgSrc}></img>
-
+                <div>
+                    <img src={imgSrc}></img>
+                    {pokemonInfo.species.varieties.length > 1 ? 
+                        <div>
+                        <button onClick={() => setSelectFormModalOpen(true)}>Select Form</button>
+                        <SelectFormModal isOpen={selectFormModalOpen} pokemonInfo={pokemonInfo} onSubmit={generateNewPokemon} onClose={() => {setSelectFormModalOpen(false)}}/>    
+                        </div> : <div></div>
+                    }
+                    
+                </div>
+                
                 <div className="info">
                     <button onClick={() => setSelectPokemonModalOpen(true)}>Select Pokemon</button>
                     <SelectPokemonModal isOpen={selectPokemonModalOpen} pokedex={selectedDex} onSubmit={generateNewPokemon} onClose={() => setSelectPokemonModalOpen(false)}/>

@@ -4,4 +4,5 @@ export interface PokemonInfo {
     name: string;
     pokemon: Pokemon;
     species: PokemonSpecies;
+    varieties: Pokemon[];
   }
