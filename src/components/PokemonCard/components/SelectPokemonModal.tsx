@@ -47,7 +47,7 @@ const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon
             const letter = alphabet[ind];
             dropdowns.push(
                 <div key={`${letter}-div`}>
-                    <select key={`${letter}-dropdown`} value={selectedDropdowns[ind] || ''} onChange={(e) => handleDropdownChange(ind, e.target.value)}>
+                    <select key={`${letter}-dropdown`} value={selectedDropdowns[ind] || ''} disabled={!arr.length} onChange={(e) => handleDropdownChange(ind, e.target.value)}>
                         <option key={`${letter}-default`} className="default" value="">-- {letter.toUpperCase()} --</option>
                         {arr.map((name: string) => <option key={name} value={name}>{name.replace(/^./, (char: string) => char.toUpperCase())}</option>)}
                     </select>
