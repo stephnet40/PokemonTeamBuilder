@@ -1,4 +1,4 @@
-import { Pokemon, PokemonClient, PokemonEntry, PokemonSpecies } from "pokenode-ts";
+import { PokemonEntry } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";
@@ -15,40 +15,10 @@ const PokemonCard = ({pokemonInfo, selectedDex, setPokemon, loadedPokemon, updat
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
     } 
-
-    const getVarieties = async (species: PokemonSpecies, defaultPokemon: Pokemon) => {
-        const api = new PokemonClient();
-        const varieties = species.varieties.filter(x => !x.is_default);
-        let varietyList: Pokemon[] = [];
-        
-        if (varieties) {
-            varietyList = await Promise.all(
-                varieties.map(variety => api.getPokemonByName(variety.pokemon.name).then(data => data))
-            );
-        }
-        
-        varietyList.unshift(defaultPokemon);
-
-        const info = {
-            name: species.name,
-            species: species,
-            pokemon: varietyList.find(x => x.is_default),
-            varieties: varietyList
-        } as PokemonInfo;
-
-        let index = loadedPokemon.findIndex(x => x.name == species.name)
-        loadedPokemon[index] = info;
-
-        setPokemon(info);
-    } 
     
     if (pokemonInfo) {
         const species = pokemonInfo.species;
         const pokemon = pokemonInfo.pokemon;
-
-        if (!pokemonInfo.varieties) {
-            getVarieties(species, pokemon);
-        }  
 
         const pokemonStats = pokemon.stats;
         

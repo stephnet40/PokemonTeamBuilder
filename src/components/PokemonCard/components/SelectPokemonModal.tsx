@@ -3,6 +3,7 @@ import Modal from "../modals/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
 import { PokemonInfo } from "../../interfaces";
+import getPokemonData from "../../utilities";
 
 interface SelectPokemonModalProps {
     isOpen: boolean;
@@ -56,24 +57,16 @@ const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon
         return dropdowns;
     }
 
-    const getData = async (name: string | undefined) => {
+    const getData = (name: string) => {
         let pokemonInfo;
 
         if (loadedPokemon.some(x => x.name == name)) {
             pokemonInfo = loadedPokemon.find(x => x.name == name);
+            onSubmit(pokemonInfo);
         } else {
-            const api = new PokemonClient();
-            const species = await api.getPokemonSpeciesByName(name!).then(data => data);
-            const pokemon = await api.getPokemonById(species.id).then(data => data);
-
-            pokemonInfo = {
-                name: name,
-                species: species,
-                pokemon: pokemon
-            } as PokemonInfo;
-        }
+            getPokemonData({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon: onSubmit})
+        }    
         
-        onSubmit(pokemonInfo);
         handleClose();
     }
 
@@ -87,7 +80,7 @@ const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon
                 {pokemonGroups.length ? displayDropdowns() : null}
             </div>
             
-            <button onClick={() => getData(selectedDropdowns.find(x => x !== null))} disabled={!selectedDropdowns.find(x => x !== null)}>Select</button>
+            <button onClick={() => getData(selectedDropdowns.find(x => x !== null)!)} disabled={!selectedDropdowns.find(x => x !== null)}>Select</button>
         </Modal>
     )
 }

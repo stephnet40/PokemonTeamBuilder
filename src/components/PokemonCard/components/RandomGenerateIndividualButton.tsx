@@ -1,5 +1,6 @@
-import { PokemonClient, PokemonEntry } from "pokenode-ts";
+import { PokemonEntry } from "pokenode-ts";
 import { PokemonInfo } from "../../interfaces";
+import getPokemonData from "../../utilities";
 
 const RandomGenerateIndividualButton = ({selectedDex, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} : {selectedDex: PokemonEntry[], loadedPokemon: PokemonInfo[], updateLoadedPokemon: any, generateNewPokemon: any}) => {
     function generateRandomNum() {
@@ -10,26 +11,8 @@ const RandomGenerateIndividualButton = ({selectedDex, loadedPokemon, updateLoade
         if (loadedPokemon.some(x => x.name == name)) {
             generateNewPokemon(loadedPokemon.find(x => x.name == name));
         } else {
-            getData(name);
+            getPokemonData({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon});
         }     
-    }
-
-    const getData = async (name: string) => {
-        const api = new PokemonClient();
-        const species = await api.getPokemonSpeciesByName(name).then(data => data);
-        const pokemon = await api.getPokemonById(species.id).then(data => data);
-
-        const pokemonInfo = {
-            name: name,
-            species: species,
-            pokemon: pokemon
-        } as PokemonInfo;
-        
-        let newLoaded = loadedPokemon;
-        newLoaded.push(pokemonInfo);
-
-        updateLoadedPokemon(newLoaded);
-        generateNewPokemon(pokemonInfo);
     }
     
     return (

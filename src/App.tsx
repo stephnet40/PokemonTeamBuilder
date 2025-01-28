@@ -41,7 +41,8 @@ function App() {
   return (
     <>
     <PokedexSelect loadedDexes={loadedDexes} updateLoadedDexes={updateLoadedDexes} getSelectedDex={getSelectedDex}/>
-    <RandomGenerateButton selectedDex={selectedDex!} loadedPokemon={loadedPokemon} updateLoadedPokemon={updateLoadedPokemon} generatePokemon={generatePokemon}/>
+    {/* Find cleaner way to randomly generate entire team */}
+    {/* <RandomGenerateButton selectedDex={selectedDex!} loadedPokemon={loadedPokemon} updateLoadedPokemon={updateLoadedPokemon} generatePokemon={generatePokemon}/> */}
     <div className='pokemon-cards'>
       {pokemonList.map((item: PokemonInfo, index: any) => {
         const [pokemon, setPokemon] = useState<PokemonInfo>(item);

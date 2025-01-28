@@ -29,7 +29,6 @@ const SelectFormModal = ({isOpen, pokemonInfo, onSubmit, onClose} : SelectFormMo
         handleClose();
     } 
 
-    console.log(pokemonInfo)
     const displayVarieties = () => {
         console.log(pokemonInfo)
         let options: any = [];
