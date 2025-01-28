@@ -6,12 +6,17 @@ const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, generat
 
     const api = new PokemonClient();
         const species = await api.getPokemonSpeciesByName(name).then(data => data);
-        const pokemon = await api.getPokemonById(species.id).then(data => data);
+
+        const varieties = species.varieties;
+        const varietyList = await Promise.all(
+            varieties.map(variety => api.getPokemonByName(variety.pokemon.name).then(data => data))
+        );
 
         const pokemonInfo = {
             name: name,
             species: species,
-            pokemon: pokemon
+            pokemon: varietyList.find(x => x.is_default),
+            varieties: varietyList
         } as PokemonInfo;
         
         let newLoaded = loadedPokemon;
