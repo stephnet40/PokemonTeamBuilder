@@ -15,28 +15,32 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
     const [selectedGame, setSelectedGame] = useState("1");
     const onGameChange = (event: any) => {
         setSelectedGame(event.target.value)
-        getSelectedPokedex(event.target.value)
+        getSelectedPokedex(Number(event.target.value))
     }
 
-    function getSelectedPokedex(id: any) {
+    function getSelectedPokedex(id: number) {
         if (id == 40 || id == 41) {
             id = id == 40 ? 2 : 5;
         }
 
         if (loadedDexes.some(x => x.id == id)) {
-            let pokedex = loadedDexes.find(x => x.id == id)?.pokemon_entries;
+            let pokedex = loadedDexes.find(x => x.id == id)!.pokemon_entries;
             if (id == 12 || id == 27 || id == 31) {
-                const pokedex2 = loadedDexes.find(x => x.id == id + 1)?.pokemon_entries;
-                const pokedex3 = loadedDexes.find(x => x.id == id + 2)?.pokemon_entries;
-                pokedex = Array.from(new Set(pokedex?.concat(pokedex2!, pokedex3!)));
+                console.log(id + 1)
+                const pokedex2 = loadedDexes.find(x => x.id == (id + 1))?.pokemon_entries;
+                const pokedex3 = loadedDexes.find(x => x.id == (id + 2))?.pokemon_entries;
+
+                pokedex = pokedex.concat(pokedex2!, pokedex3!);
+                
+                pokedex = Object.values(pokedex.reduce((acc, obj) => ({...acc, [obj.pokemon_species.name]: obj}), {}));
             }     
 
             getSelectedDex(pokedex)
         } else {
-            getPokedexData(parseInt(id));
+            getPokedexData(id);
         }
     }
-
+    
     const getPokedexData = async (id: number) => {
         const api = new GameClient();
         const response = await api.getPokedexById(id).then(data => data);
@@ -53,10 +57,12 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
             newLoaded.push(response2);
             newLoaded.push(response3);
 
-            pokedex = Array.from(new Set(pokedex.concat(response2.pokemon_entries, response3.pokemon_entries)));
+            pokedex = pokedex.concat(response2.pokemon_entries, response3.pokemon_entries)
+
+            pokedex = Object.values(pokedex.reduce((acc, obj) => ({...acc, [obj.pokemon_species.name]: obj}), {}));
         }
         updateLoadedDexes(newLoaded);
-
+        console.log(pokedex)
         getSelectedDex(pokedex);
     }
     
