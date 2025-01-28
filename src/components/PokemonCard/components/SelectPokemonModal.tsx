@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
 import { PokemonInfo } from "../../interfaces";
-import getPokemonData from "../../utilities";
+import { getPokemonData } from "../../utilities";
 
 interface SelectPokemonModalProps {
     isOpen: boolean;

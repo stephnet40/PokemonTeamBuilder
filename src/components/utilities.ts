@@ -1,8 +1,7 @@
-import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts"
-import { useEffect, useState } from "react";
+import { PokemonClient } from "pokenode-ts"
 import { PokemonInfo } from "./interfaces";
 
-const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} : {name: string, loadedPokemon: PokemonInfo[], updateLoadedPokemon: any, generateNewPokemon: any}) => {
+export const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} : {name: string, loadedPokemon: PokemonInfo[], updateLoadedPokemon: any, generateNewPokemon: any}) => {
 
     const api = new PokemonClient();
         const species = await api.getPokemonSpeciesByName(name).then(data => data);
@@ -26,5 +25,4 @@ const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, generat
         generateNewPokemon(pokemonInfo);
 }
 
-export default getPokemonData;
 

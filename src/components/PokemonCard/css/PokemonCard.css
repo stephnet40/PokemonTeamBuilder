@@ -29,8 +29,10 @@
 }
 
 .name {
+    text-align: left;
     display: grid;
     grid-template-columns: 50% 50%;
+    justify-content: start;
 }
 
 .pokemon-select {
@@ -42,7 +44,7 @@
 .type-list {
     width: 150px;
     display: flex;
-    justify-content: space-around;
+    gap: 10px;
     margin: auto;
 }
 

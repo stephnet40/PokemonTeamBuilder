@@ -1,6 +1,6 @@
 import { PokemonEntry } from "pokenode-ts";
 import { PokemonInfo } from "../../interfaces";
-import getPokemonData from "../../utilities";
+import { getPokemonData } from "../../utilities";
 
 const RandomGenerateIndividualButton = ({selectedDex, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} : {selectedDex: PokemonEntry[], loadedPokemon: PokemonInfo[], updateLoadedPokemon: any, generateNewPokemon: any}) => {
     function generateRandomNum() {
