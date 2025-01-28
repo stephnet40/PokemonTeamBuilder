@@ -14,10 +14,29 @@
     padding: 10px;
 }
 
+.container button {
+    font-size: 14px;
+    width: auto;
+    border-radius: 3px;
+    padding: 4px 8px;
+}
+
+.info-header {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .name {
     display: grid;
     grid-template-columns: 50% 50%;
-    justify-content: center;
+}
+
+.pokemon-select {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
 }
 
 .type-list {

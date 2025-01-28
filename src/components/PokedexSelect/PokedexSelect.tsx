@@ -1,4 +1,4 @@
-import { GameClient, Pokedex, PokemonEntry } from 'pokenode-ts'
+import { GameClient, Pokedex } from 'pokenode-ts'
 import './PokedexSelect.css'
 import { useState } from 'react'
 
@@ -26,7 +26,6 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
         if (loadedDexes.some(x => x.id == id)) {
             let pokedex = loadedDexes.find(x => x.id == id)!.pokemon_entries;
             if (id == 12 || id == 27 || id == 31) {
-                console.log(id + 1)
                 const pokedex2 = loadedDexes.find(x => x.id == (id + 1))?.pokemon_entries;
                 const pokedex3 = loadedDexes.find(x => x.id == (id + 2))?.pokemon_entries;
 
@@ -62,7 +61,6 @@ const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loade
             pokedex = Object.values(pokedex.reduce((acc, obj) => ({...acc, [obj.pokemon_species.name]: obj}), {}));
         }
         updateLoadedDexes(newLoaded);
-        console.log(pokedex)
         getSelectedDex(pokedex);
     }
     

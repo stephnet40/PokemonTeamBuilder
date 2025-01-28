@@ -32,7 +32,7 @@ const PokemonCard = ({pokemonInfo, selectedDex, setPokemon, loadedPokemon, updat
                     <img src={imgSrc}></img>
                     {pokemonInfo.species.varieties.length > 1 ? 
                         <div>
-                        <button onClick={() => setSelectFormModalOpen(true)}>Select Form</button>
+                        <button onClick={() => setSelectFormModalOpen(true)}>Forms</button>
                         <SelectFormModal isOpen={selectFormModalOpen} pokemonInfo={pokemonInfo} onSubmit={generateNewPokemon} onClose={() => {setSelectFormModalOpen(false)}}/>    
                         </div> : <div></div>
                     }
@@ -40,27 +40,32 @@ const PokemonCard = ({pokemonInfo, selectedDex, setPokemon, loadedPokemon, updat
                 </div>
                 
                 <div className="info">
-                    <button onClick={() => setSelectPokemonModalOpen(true)}>Select Pokemon</button>
-                    <SelectPokemonModal 
-                        isOpen={selectPokemonModalOpen} 
-                        pokedex={selectedDex} 
-                        loadedPokemon={loadedPokemon}
-                        updateLoadedPokemon={updateLoadedPokemon}
-                        onSubmit={generateNewPokemon} 
-                        onClose={() => setSelectPokemonModalOpen(false)}
-                    />
-                    
-                    <RandomGenerateIndividualButton 
-                        selectedDex={selectedDex} 
-                        loadedPokemon={loadedPokemon}
-                        updateLoadedPokemon={updateLoadedPokemon}
-                        generateNewPokemon={generateNewPokemon}
-                    />
 
-                    <div className="name">
-                        <h3>{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
+                    <div className="info-header">
+                        <div className="name">
+                            <h3>{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
 
-                        <div className="type-list">{typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}</div>
+                            <div className="type-list">{typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}</div>
+                        </div>
+
+                        <div className="pokemon-select">
+                            <button onClick={() => setSelectPokemonModalOpen(true)}>Select</button>
+                            <SelectPokemonModal 
+                                isOpen={selectPokemonModalOpen} 
+                                pokedex={selectedDex} 
+                                loadedPokemon={loadedPokemon}
+                                updateLoadedPokemon={updateLoadedPokemon}
+                                onSubmit={generateNewPokemon} 
+                                onClose={() => setSelectPokemonModalOpen(false)}
+                            />
+                            
+                            <RandomGenerateIndividualButton 
+                                selectedDex={selectedDex} 
+                                loadedPokemon={loadedPokemon}
+                                updateLoadedPokemon={updateLoadedPokemon}
+                                generateNewPokemon={generateNewPokemon}
+                            />
+                        </div>
                     </div>
 
                     <StatBars statsArr={pokemonStats} />
