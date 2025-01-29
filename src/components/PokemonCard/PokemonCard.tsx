@@ -1,4 +1,4 @@
-import { PokemonEntry } from "pokenode-ts";
+import { Ability, PokemonEntry } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";
@@ -7,7 +7,20 @@ import SelectPokemonModal from "./components/SelectPokemonModal";
 import { PokemonInfo } from "../interfaces";
 import SelectFormModal from "./components/SelectFormModal";
 
-const PokemonCard = ({pokemonInfo, selectedDex, setPokemon, loadedPokemon, updateLoadedPokemon}: {pokemonInfo: PokemonInfo, selectedDex: PokemonEntry[], setPokemon: any, loadedPokemon: PokemonInfo[], updateLoadedPokemon: any}) => {
+interface PokemonCardProps {
+    pokemonInfo: PokemonInfo,
+    selectedDex: PokemonEntry[],
+    setPokemon: any,
+    loadedPokemon: PokemonInfo[],
+    updateLoadedPokemon: any,
+    loadedAbilities: Ability[],
+    updateLoadedAbilities: any
+}
+
+const PokemonCard = (
+    {pokemonInfo, selectedDex, setPokemon, loadedPokemon, updateLoadedPokemon, 
+        loadedAbilities, updateLoadedAbilities} 
+    : PokemonCardProps ) => {
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
     const [selectFormModalOpen, setSelectFormModalOpen] = useState<boolean>(false);

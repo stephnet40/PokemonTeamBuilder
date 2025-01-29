@@ -2,7 +2,15 @@ import { GameClient, Pokedex } from 'pokenode-ts'
 import './PokedexSelect.css'
 import { useState } from 'react'
 
-const PokedexSelect = ({loadedDexes, updateLoadedDexes, getSelectedDex} : {loadedDexes: Pokedex[], updateLoadedDexes: any, getSelectedDex: any}) => {
+interface PokedexSelectProps {
+    loadedDexes: Pokedex[],
+    updateLoadedDexes: any,
+    getSelectedDex: any
+}
+
+const PokedexSelect = (
+    {loadedDexes, updateLoadedDexes, getSelectedDex} 
+    : PokedexSelectProps) => {
 
     const gameList = [
         ["2", "Red, Blue & Yellow"], ["3", "Gold, Silver & Crystal"], ["4", "Ruby, Sapphire & Emerald"], ["40", "FireRed & LeafGreen"], 

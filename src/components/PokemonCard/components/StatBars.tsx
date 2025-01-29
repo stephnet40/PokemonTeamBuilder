@@ -1,7 +1,11 @@
 import { PokemonStat } from "pokenode-ts";
 import "../css/StatBars.css"
 
-const StatBars = ({statsArr} : {statsArr: PokemonStat[]}) => {
+interface StatBarsProps {
+    statsArr: PokemonStat[]
+}
+
+const StatBars = ({statsArr} : StatBarsProps) => {
 
     const statLabels = ["HP", "Atk", "Def", "Sp.Atk", "Sp.Def", "Spd"]
 

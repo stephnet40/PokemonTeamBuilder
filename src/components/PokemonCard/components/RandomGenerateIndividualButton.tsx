@@ -2,7 +2,17 @@ import { PokemonEntry } from "pokenode-ts";
 import { PokemonInfo } from "../../interfaces";
 import { getPokemonData } from "../../utilities";
 
-const RandomGenerateIndividualButton = ({selectedDex, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} : {selectedDex: PokemonEntry[], loadedPokemon: PokemonInfo[], updateLoadedPokemon: any, generateNewPokemon: any}) => {
+interface RandomGenerateIndividualButtonProps {
+    selectedDex: PokemonEntry[],
+    loadedPokemon: PokemonInfo[],
+    updateLoadedPokemon: any,
+    generateNewPokemon: any
+}
+
+const RandomGenerateIndividualButton = (
+    {selectedDex, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} 
+    : RandomGenerateIndividualButtonProps) => {
+        
     function generateRandomNum() {
         const maxNum = selectedDex.length;
         const num = Math.floor(Math.random() * (maxNum - 1) + 1) - 1; 
