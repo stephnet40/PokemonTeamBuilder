@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard/PokemonCard'
-import RandomGenerateButton from './components/RandomGenerateButton'
+//import RandomGenerateButton from './components/RandomGenerateButton'
 import { GameClient, Pokedex, PokemonEntry } from 'pokenode-ts';
 import PokedexSelect from './components/PokedexSelect/PokedexSelect';
 import { PokemonInfo } from './components/interfaces';
 
 function App() {
-  const [pokemonList, setPokemonList] = useState<PokemonInfo[]>(new Array(6).fill(null));
-  const generatePokemon = (data: any) => {
-    setPokemonList(data);
-  }
-
+  // const [pokemonList, setPokemonList] = useState<PokemonInfo[]>(new Array(6).fill(null));
+  // const generatePokemon = (data: any) => {
+  //   setPokemonList(data);
+  // }
+  const pokemonList = new Array(6).fill(null);
   const [loadedPokemon, setLoadedPokemon] = useState<PokemonInfo[]>([])
   const updateLoadedPokemon = (data: PokemonInfo[]) => {
     setLoadedPokemon(data);
@@ -53,7 +53,7 @@ function App() {
                   selectedDex={selectedDex!} 
                   setPokemon={setPokemon} 
                   loadedPokemon={loadedPokemon} 
-                  updateLoadedPokemon={updateLoadedDexes}
+                  updateLoadedPokemon={updateLoadedPokemon}
                 />
       })}
     </div>

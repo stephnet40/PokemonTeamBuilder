@@ -17,7 +17,6 @@ const PokemonCard = ({pokemonInfo, selectedDex, setPokemon, loadedPokemon, updat
     } 
     
     if (pokemonInfo) {
-        const species = pokemonInfo.species;
         const pokemon = pokemonInfo.pokemon;
 
         const pokemonStats = pokemon.stats;

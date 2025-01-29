@@ -1,4 +1,4 @@
-import { PokemonClient, PokemonEntry } from "pokenode-ts";
+import { PokemonEntry } from "pokenode-ts";
 import Modal from "../modals/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
@@ -37,7 +37,7 @@ const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon
 
     const [selectedDropdowns, setSelectedDropdown] = useState<(string | null)[]>(new Array(26).fill(null));
     const handleDropdownChange = (index: number, value: string) => {
-        const newSelectedDropdowns = selectedDropdowns?.map((val, i) => (i === index ? value : null));
+        const newSelectedDropdowns = selectedDropdowns?.map((_val, i) => (i === index ? value : null));
         setSelectedDropdown(newSelectedDropdowns);
     }
     
