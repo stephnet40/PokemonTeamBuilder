@@ -30,7 +30,6 @@ const SelectFormModal = ({isOpen, pokemonInfo, onSubmit, onClose} : SelectFormMo
     } 
 
     const displayVarieties = () => {
-        console.log(pokemonInfo)
         let options: any = [];
         varieties?.forEach((pokemon: Pokemon) => {
             options.push(

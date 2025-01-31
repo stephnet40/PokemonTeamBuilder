@@ -6,6 +6,7 @@ import { useState } from "react";
 import SelectPokemonModal from "./components/SelectPokemonModal";
 import { PokemonInfo } from "../interfaces";
 import SelectFormModal from "./components/SelectFormModal";
+import Abilities from "./components/Abilities";
 
 interface PokemonCardProps {
     pokemonInfo: PokemonInfo,
@@ -32,6 +33,7 @@ const PokemonCard = (
     if (pokemonInfo) {
         const pokemon = pokemonInfo.pokemon;
 
+        const pokemonAbilities = pokemon.abilities;
         const pokemonStats = pokemon.stats;
         
         const pokemonTypes = pokemon.types.map(item => item.type.name);
@@ -79,6 +81,12 @@ const PokemonCard = (
                             />
                         </div>
                     </div>
+
+                    <Abilities 
+                        abilityList={pokemonAbilities} 
+                        loadedAbilities={loadedAbilities}
+                        updateLoadedAbilities={updateLoadedAbilities}
+                    />
 
                     <StatBars statsArr={pokemonStats} />
                 </div>
