@@ -1,4 +1,12 @@
-# React + TypeScript + Vite
+# Pokemon Team Builder
+
+Made with React + Typescript + Vite
+
+I began this project as a way to learn React, as well as build a tool that I personally would find useful. The goal of the app is to allow users to compare relevant data of up to six Pokemon and determine the strengths and weaknesses of the team. A randomize button is also available.
+
+The API used is [PokeApi](https://pokeapi.co/).
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -7,7 +15,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+### Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
@@ -47,4 +55,4 @@ export default tseslint.config({
     ...react.configs['jsx-runtime'].rules,
   },
 })
-```
+```](url)
