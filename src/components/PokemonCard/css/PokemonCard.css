@@ -33,11 +33,21 @@ button {
 }
 
 .sprite img {
-    background-color: rgba(255, 255, 255, .6);
+    width: 100%;
+    background-color: rgba(255, 255, 255, .5);
     border-radius: 5px;
 }
 
+.info {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+}
+
 .info-header {
+    width: 100%;
     display: grid;
     grid-template-columns: 65% 35%;
     justify-content: space-between;
@@ -46,9 +56,7 @@ button {
 
 .name {
     text-align: left;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    justify-content: start;
+    margin: 0;
 }
 
 .pokemon-select {
@@ -58,13 +66,14 @@ button {
 }
 
 .type-list {
-    width: 150px;
+    width: 100%;
     display: flex;
-    gap: 10px;
-    margin: auto;
+    gap: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .type-list img {
-    width: 70px;
+    width: 65px;
 }
 

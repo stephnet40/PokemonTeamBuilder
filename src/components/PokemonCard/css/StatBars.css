@@ -37,4 +37,5 @@
     grid-auto-flow: column;
     gap: 5px 15px;
     justify-content: end;
+    margin-top: auto;
 }

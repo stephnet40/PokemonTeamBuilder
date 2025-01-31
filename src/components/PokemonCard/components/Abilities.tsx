@@ -20,6 +20,7 @@ const Abilities = ({abilityList, loadedAbilities, updateLoadedAbilities} : Abili
         getAbilityData({abilities: abilityList, loadedAbilities, updateLoadedAbilities, generateAbility: getCurrAbility})
     }, [abilityList]);
 
+    console.log(abilityList)
     const displayAbilities = () => {
         let abilities: any = [];
         abilityList.forEach((item, ind) => {
@@ -30,7 +31,7 @@ const Abilities = ({abilityList, loadedAbilities, updateLoadedAbilities} : Abili
                 abilities.push(
                     <tr key={`${slot}-${item.ability.name}`} className="ability">
                         <td className="ability-name">{ability?.name.replace(/-/g, " ").replace(/^.|(?<=\s)(.)/g, char => char.toUpperCase())}</td>
-                        <td>
+                        <td className="ability-description">
                             <span className="hidden">{isHidden ? "(Hidden) " : ""}</span>
                             {ability?.flavor_text_entries.find(x => x.language.name == "en")?.flavor_text}
                         </td>

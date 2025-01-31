@@ -1,4 +1,6 @@
 table, td {
+    table-layout: fixed;
+    line-height: normal;
     border: 1px solid rgb(0, 0, 0);
     border-collapse: collapse;
 }
@@ -18,6 +20,10 @@ td {
     width: 25%;
     text-wrap: nowrap;
     font-weight: bold;  
+}
+
+.ability-description {
+    width: 75%;
 }
 
 .hidden {

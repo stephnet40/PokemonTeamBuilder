@@ -55,11 +55,7 @@ const PokemonCard = (
                 <div className="info">
 
                     <div className="info-header">
-                        <div className="name">
-                            <h3>{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
-
-                            <div className="type-list">{typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}</div>
-                        </div>
+                        <h3 className="name">{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
 
                         <div className="pokemon-select">
                             <button onClick={() => setSelectPokemonModalOpen(true)}>Select</button>
@@ -79,6 +75,10 @@ const PokemonCard = (
                                 generateNewPokemon={generateNewPokemon}
                             />
                         </div>
+                    </div>
+
+                    <div className="type-list">
+                        {typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}
                     </div>
 
                     <Abilities 
