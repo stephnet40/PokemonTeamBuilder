@@ -73,12 +73,12 @@ const PokedexSelect = (
     }
     
     return (
-        <div id="game-select">
-            <div>
+        <div className="game-select">
+            <div className="default">
                 <input type="radio" id="1" name="game-list" value="1" checked={selectedGame == "1"} onChange={onGameChange}></input>
                 <label>All</label>
             </div>
-            <div id="games"> 
+            <div className="games"> 
             {gameList.map(([dex, game], index) => {
                 return (
                     <div key={index}>

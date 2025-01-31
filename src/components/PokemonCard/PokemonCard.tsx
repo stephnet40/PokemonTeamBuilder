@@ -42,15 +42,14 @@ const PokemonCard = (
 
         return (
             <div className="container">
-                <div>
+                <div className="sprite">
                     <img src={imgSrc}></img>
                     {pokemonInfo.species.varieties.length > 1 ? 
                         <div>
                         <button onClick={() => setSelectFormModalOpen(true)}>Forms</button>
                         <SelectFormModal isOpen={selectFormModalOpen} pokemonInfo={pokemonInfo} onSubmit={generateNewPokemon} onClose={() => {setSelectFormModalOpen(false)}}/>    
                         </div> : <div></div>
-                    }
-                    
+                    }      
                 </div>
                 
                 <div className="info">
@@ -94,7 +93,7 @@ const PokemonCard = (
         );
     }
     return (
-        <div>
+        <div className="container-empty">
             <button onClick={() => setSelectPokemonModalOpen(true)}>Select Pokemon</button>
             <SelectPokemonModal 
                 isOpen={selectPokemonModalOpen} 
@@ -110,7 +109,6 @@ const PokemonCard = (
                 updateLoadedPokemon={updateLoadedPokemon}
                 generateNewPokemon={generateNewPokemon}
             />
-            <h3>Empty</h3>
         </div>
     )
 }

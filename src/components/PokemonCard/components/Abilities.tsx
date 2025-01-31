@@ -28,10 +28,13 @@ const Abilities = ({abilityList, loadedAbilities, updateLoadedAbilities} : Abili
             const ability = currAbility[ind];
             if (ability) {
                 abilities.push(
-                    <div key={`${slot}-${item.ability.name}`}>
-                        <span>{`${ability?.name.replace("-", " ").replace(/^.|(?<=\s)(.)/g, char => char.toUpperCase())}: `}</span>
-                        {ability?.flavor_text_entries.find(x => x.language.name == "en")?.flavor_text}
-                    </div>
+                    <tr key={`${slot}-${item.ability.name}`} className="ability">
+                        <td className="ability-name">{ability?.name.replace(/-/g, " ").replace(/^.|(?<=\s)(.)/g, char => char.toUpperCase())}</td>
+                        <td>
+                            <span className="hidden">{isHidden ? "(Hidden) " : ""}</span>
+                            {ability?.flavor_text_entries.find(x => x.language.name == "en")?.flavor_text}
+                        </td>
+                    </tr>
                 )
             }
             
@@ -41,9 +44,11 @@ const Abilities = ({abilityList, loadedAbilities, updateLoadedAbilities} : Abili
     }
 
     return (
-        <div>
-            {currAbility.length ? displayAbilities() : null}
-        </div>
+        <table className="ability-list">
+            <tbody>
+                {currAbility.length ? displayAbilities() : null}
+            </tbody>
+        </table>
     )
 }
 

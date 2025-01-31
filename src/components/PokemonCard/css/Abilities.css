@@ -1,0 +1,25 @@
+table, td {
+    border: 1px solid rgb(0, 0, 0);
+    border-collapse: collapse;
+}
+
+td {
+    padding: 4px;
+}
+
+.ability-list {
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.ability-name {
+    width: 25%;
+    text-wrap: nowrap;
+    font-weight: bold;  
+}
+
+.hidden {
+    font-style: italic;
+}

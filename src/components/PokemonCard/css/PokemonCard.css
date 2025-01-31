@@ -6,19 +6,35 @@
     gap: 20px;
   }
 
-.container {
+.container, .container-empty {
     display: grid;
-    grid-template-columns: 15% 80%;
     gap: 10px;
-    border: 2px solid white;
+    border: 2px solid black;
     padding: 10px;
 }
 
-.container button {
+.container {
+    grid-template-columns: 15% 80%;
+    gap: 20px;
+}
+
+.container-empty {
+    grid-template-columns: 40% 40%;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+}
+
+button {
     font-size: 14px;
     width: auto;
     border-radius: 3px;
     padding: 4px 8px;
+}
+
+.sprite img {
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 5px;
 }
 
 .info-header {

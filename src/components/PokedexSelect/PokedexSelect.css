@@ -1,15 +1,19 @@
-#game-select {
-    width: 90%;
+.game-select {
+    width: 100%;
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
     margin: 0 auto 40px;
 }
 
-#games {
-    display: flex;
-    flex-wrap: wrap;
+.games {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
     justify-content: center;
-    text-align: center;
+    text-align: left;
 }
 
-#game-select div {
+.game-select div {
     margin: 5px 15px;
 }
