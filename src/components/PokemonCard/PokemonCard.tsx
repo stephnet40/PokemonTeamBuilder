@@ -7,6 +7,7 @@ import SelectPokemonModal from "./components/SelectPokemonModal";
 import { PokemonInfo } from "../interfaces";
 import SelectFormModal from "./components/SelectFormModal";
 import Abilities from "./components/Abilities";
+import Weaknesses from "./components/Weaknesses";
 
 interface PokemonCardProps {
     pokemonInfo: PokemonInfo,
@@ -88,6 +89,7 @@ const PokemonCard = (
                     />
 
                     <StatBars statsArr={pokemonStats} />
+                    <Weaknesses />
                 </div>
             </div>
         );

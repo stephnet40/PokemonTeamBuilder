@@ -20,7 +20,6 @@ const Abilities = ({abilityList, loadedAbilities, updateLoadedAbilities} : Abili
         getAbilityData({abilities: abilityList, loadedAbilities, updateLoadedAbilities, generateAbility: getCurrAbility})
     }, [abilityList]);
 
-    console.log(abilityList)
     const displayAbilities = () => {
         let abilities: any = [];
         abilityList.forEach((item, ind) => {
