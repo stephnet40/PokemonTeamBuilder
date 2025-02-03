@@ -1,4 +1,4 @@
-import { Ability, PokemonAbility, PokemonClient } from "pokenode-ts"
+import { Ability, PokemonAbility, PokemonClient, Type, TypeRelations } from "pokenode-ts"
 import { PokemonInfo } from "./interfaces";
 
 interface getPokemonDataProps {
@@ -13,6 +13,13 @@ interface getAbilityDataProps {
     loadedAbilities: Ability[],
     updateLoadedAbilities: any,
     generateAbility: any
+}
+
+interface getTypeDataProps {
+    types: string[],
+    loadedTypes: Type[],
+    updateLoadedTypes: any,
+    generateTypeRelations: any
 }
 
 const api = new PokemonClient();
@@ -64,6 +71,34 @@ export const getAbilityData = async ({abilities, loadedAbilities, updateLoadedAb
 
     updateLoadedAbilities(newLoaded);
     generateAbility(abilityList);
+}
+
+export const getTypeData = async ({types, loadedTypes, updateLoadedTypes, generateTypeRelations} : getTypeDataProps) => {
+
+    let typeRelations: TypeRelations[] = [];
+    const newTypeNames: string[] = [];
+
+    types.forEach((item) => {
+        if (loadedTypes.some(x => x.name == item)) {
+            typeRelations.push(loadedTypes.find(x => x.name == item)?.damage_relations!);
+        } else {
+            newTypeNames.push(item);
+        }
+    })
+
+    const newTypes = await Promise.all(
+        newTypeNames.map(type => api.getTypeByName(type).then(data => data))
+    );
+
+    let newLoaded = loadedTypes;
+    newLoaded.push(...newTypes);
+
+    newTypes.forEach(type => {
+        typeRelations.push(type.damage_relations);
+    })
+
+    updateLoadedTypes(newLoaded);
+    generateTypeRelations(typeRelations);
 }
 
 

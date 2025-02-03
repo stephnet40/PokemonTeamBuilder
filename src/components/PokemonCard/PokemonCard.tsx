@@ -1,4 +1,4 @@
-import { Ability, PokemonEntry } from "pokenode-ts";
+import { Ability, PokemonEntry, Type } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";
@@ -16,12 +16,14 @@ interface PokemonCardProps {
     loadedPokemon: PokemonInfo[],
     updateLoadedPokemon: any,
     loadedAbilities: Ability[],
-    updateLoadedAbilities: any
+    updateLoadedAbilities: any,
+    loadedTypes: Type[],
+    updateLoadedTypes: any
 }
 
 const PokemonCard = (
     {pokemonInfo, selectedDex, setPokemon, loadedPokemon, updateLoadedPokemon, 
-        loadedAbilities, updateLoadedAbilities} 
+        loadedAbilities, updateLoadedAbilities, loadedTypes, updateLoadedTypes} 
     : PokemonCardProps ) => {
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
@@ -89,7 +91,11 @@ const PokemonCard = (
                     />
 
                     <StatBars statsArr={pokemonStats} />
-                    <Weaknesses />
+                    <Weaknesses 
+                        pokemonTypes={pokemonTypes}
+                        loadedTypes={loadedTypes}
+                        updateLoadedTypes={updateLoadedTypes}
+                    />
                 </div>
             </div>
         );
