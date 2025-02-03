@@ -1,4 +1,4 @@
-import { Ability, EvolutionChain, EvolutionClient, PokemonEntry, Type } from "pokenode-ts";
+import { Ability, EvolutionChain, PokemonEntry, Type } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";

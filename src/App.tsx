@@ -70,7 +70,7 @@ function App() {
                   loadedPokemon={loadedPokemon} 
                   updateLoadedPokemon={updateLoadedPokemon}
                   loadedEvolutionChains={loadedEvolutionChains}
-                  updateLoadedEvolutionChains={updateLoadedAbilities}
+                  updateLoadedEvolutionChains={updateLoadedEvolutionChains}
                   loadedAbilities={loadedAbilities}
                   updateLoadedAbilities={updateLoadedAbilities}
                   loadedTypes={loadedTypes}
