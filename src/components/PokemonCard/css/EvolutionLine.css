@@ -1,0 +1,17 @@
+.evolution-chain {
+    width: 100%;
+    background-color: rgba(255, 255, 255, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.evolution-chain button {
+    background-color: transparent;
+    padding: 0;
+}
+
+.sprite-evo {
+    width: 40px;
+}

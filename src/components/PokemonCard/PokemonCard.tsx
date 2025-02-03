@@ -8,6 +8,7 @@ import { PokemonInfo } from "../interfaces";
 import SelectFormModal from "./components/SelectFormModal";
 import Abilities from "./components/Abilities";
 import Weaknesses from "./components/Weaknesses";
+import EvolutionLine from "./components/EvolutionLine";
 
 interface PokemonCardProps {
     pokemonInfo: PokemonInfo,
@@ -37,7 +38,6 @@ const PokemonCard = (
     } 
     
     if (pokemonInfo) {
-        console.log(pokemonInfo)
         const pokemon = pokemonInfo.pokemon;
 
         const pokemonAbilities = pokemon.abilities;
@@ -103,6 +103,14 @@ const PokemonCard = (
                         pokemonTypes={pokemonTypes}
                         loadedTypes={loadedTypes}
                         updateLoadedTypes={updateLoadedTypes}
+                    />
+
+                    <EvolutionLine 
+                        evolutionChain={pokemonInfo.evolutionChain}
+                        loadedPokemon={loadedPokemon}
+                        updateLoadedPokemon={updateLoadedPokemon}
+                        loadedEvolutionChains={loadedEvolutionChains}
+                        generateNewPokemon={generateNewPokemon}
                     />
                 </div>
             </div>

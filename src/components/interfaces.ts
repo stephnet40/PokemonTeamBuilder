@@ -10,6 +10,7 @@ export interface PokemonInfo {
 
 export interface EvolutionData {
   name: string;
+  stage: number;
   minLevel: number;
   trigger: string | null;
   item: string | null;
