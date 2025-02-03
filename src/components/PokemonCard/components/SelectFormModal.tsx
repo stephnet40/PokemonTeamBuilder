@@ -22,8 +22,9 @@ const SelectFormModal = ({isOpen, pokemonInfo, onSubmit, onClose} : SelectFormMo
             name: pokemonInfo?.name,
             species: pokemonInfo?.species,
             pokemon: newPokemon,
-            varieties: varieties
-        }
+            varieties: varieties,
+            evolutionChain: pokemonInfo?.evolutionChain
+        } as PokemonInfo
 
         onSubmit(newInfo);
         handleClose();
