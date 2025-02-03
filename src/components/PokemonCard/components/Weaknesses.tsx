@@ -52,7 +52,7 @@ const Weaknesses = ({pokemonTypes, loadedTypes, updateLoadedTypes} : weaknessesP
         let damageModifications: any = [];
         types.forEach(type => {
             const imgSrc = `typeSymbols/${type}.png`;
-            const type1Mod = getModifier(type, typeRelations[0]);
+            const type1Mod = typeRelations.length ? getModifier(type, typeRelations[0]) : 1;
             const type2Mod = typeRelations.length > 1 ? getModifier(type, typeRelations[1]) : 1;
             const modClass = getModClass(type1Mod * type2Mod);
             if (modClass == chartType) {
@@ -69,7 +69,7 @@ const Weaknesses = ({pokemonTypes, loadedTypes, updateLoadedTypes} : weaknessesP
             }
             
         })
-        return damageModifications.length ? damageModifications : "--None--";
+        return damageModifications.length ? damageModifications : <td className="empty-cell">--None--</td>;
     }
 
     return (

@@ -1,8 +1,16 @@
 import { Pokemon, PokemonSpecies } from "pokenode-ts";
 
 export interface PokemonInfo {
-    name: string;
-    pokemon: Pokemon;
-    species: PokemonSpecies;
-    varieties: Pokemon[];
-  }
+  name: string;
+  pokemon: Pokemon;
+  species: PokemonSpecies;
+  varieties: Pokemon[];
+  evolutionChain: EvolutionData[];
+}
+
+export interface EvolutionData {
+  name: string;
+  minLevel: number;
+  trigger: string | null;
+  item: string | null;
+}

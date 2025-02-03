@@ -1,4 +1,4 @@
-import { Ability, PokemonEntry, Type } from "pokenode-ts";
+import { Ability, EvolutionChain, EvolutionClient, PokemonEntry, Type } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";
@@ -15,6 +15,8 @@ interface PokemonCardProps {
     setPokemon: any,
     loadedPokemon: PokemonInfo[],
     updateLoadedPokemon: any,
+    loadedEvolutionChains: EvolutionChain[],
+    updateLoadedEvolutionChains: any,
     loadedAbilities: Ability[],
     updateLoadedAbilities: any,
     loadedTypes: Type[],
@@ -23,7 +25,8 @@ interface PokemonCardProps {
 
 const PokemonCard = (
     {pokemonInfo, selectedDex, setPokemon, loadedPokemon, updateLoadedPokemon, 
-        loadedAbilities, updateLoadedAbilities, loadedTypes, updateLoadedTypes} 
+        loadedEvolutionChains, updateLoadedEvolutionChains, loadedAbilities, updateLoadedAbilities, 
+        loadedTypes, updateLoadedTypes} 
     : PokemonCardProps ) => {
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
@@ -34,6 +37,7 @@ const PokemonCard = (
     } 
     
     if (pokemonInfo) {
+        console.log(pokemonInfo)
         const pokemon = pokemonInfo.pokemon;
 
         const pokemonAbilities = pokemon.abilities;
@@ -67,6 +71,8 @@ const PokemonCard = (
                                 pokedex={selectedDex} 
                                 loadedPokemon={loadedPokemon}
                                 updateLoadedPokemon={updateLoadedPokemon}
+                                loadedEvolutionChains={loadedEvolutionChains}
+                                updateLoadedEvolutionChains={updateLoadedEvolutionChains}
                                 onSubmit={generateNewPokemon} 
                                 onClose={() => setSelectPokemonModalOpen(false)}
                             />
@@ -75,6 +81,8 @@ const PokemonCard = (
                                 selectedDex={selectedDex} 
                                 loadedPokemon={loadedPokemon}
                                 updateLoadedPokemon={updateLoadedPokemon}
+                                loadedEvolutionChains={loadedEvolutionChains}
+                                updateLoadedEvolutionChains={updateLoadedEvolutionChains}
                                 generateNewPokemon={generateNewPokemon}
                             />
                         </div>
@@ -108,6 +116,8 @@ const PokemonCard = (
                 pokedex={selectedDex} 
                 loadedPokemon={loadedPokemon}
                 updateLoadedPokemon={updateLoadedPokemon}
+                loadedEvolutionChains={loadedEvolutionChains}
+                updateLoadedEvolutionChains={updateLoadedEvolutionChains}
                 onSubmit={generateNewPokemon} 
                 onClose={() => setSelectPokemonModalOpen(false)}
             />
@@ -115,6 +125,8 @@ const PokemonCard = (
                 selectedDex={selectedDex} 
                 loadedPokemon={loadedPokemon}
                 updateLoadedPokemon={updateLoadedPokemon}
+                loadedEvolutionChains={loadedEvolutionChains}
+                updateLoadedEvolutionChains={updateLoadedEvolutionChains}
                 generateNewPokemon={generateNewPokemon}
             />
         </div>

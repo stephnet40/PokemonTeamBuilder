@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import PokemonCard from './components/PokemonCard/PokemonCard'
 //import RandomGenerateButton from './components/RandomGenerateButton'
-import { Ability, GameClient, Pokedex, PokemonEntry, Type } from 'pokenode-ts';
+import { Ability, EvolutionChain, GameClient, Pokedex, PokemonEntry, Type } from 'pokenode-ts';
 import PokedexSelect from './components/PokedexSelect/PokedexSelect';
 import { PokemonInfo } from './components/interfaces';
 
@@ -25,6 +25,11 @@ function App() {
   const [loadedAbilities, setLoadedAbilities] = useState<Ability[]>([]);
   const updateLoadedAbilities = (data: Ability[]) => {
     setLoadedAbilities(data);
+  }
+
+  const [loadedEvolutionChains, setLoadedEvolutionChains] = useState<EvolutionChain[]>([]);
+  const updateLoadedEvolutionChains = (data: EvolutionChain[]) => {
+    setLoadedEvolutionChains(data);
   }
 
   const [loadedTypes, setLoadedTypes] = useState<Type[]>([]);
@@ -64,6 +69,8 @@ function App() {
                   setPokemon={setPokemon} 
                   loadedPokemon={loadedPokemon} 
                   updateLoadedPokemon={updateLoadedPokemon}
+                  loadedEvolutionChains={loadedEvolutionChains}
+                  updateLoadedEvolutionChains={updateLoadedAbilities}
                   loadedAbilities={loadedAbilities}
                   updateLoadedAbilities={updateLoadedAbilities}
                   loadedTypes={loadedTypes}

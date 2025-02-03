@@ -1,10 +1,12 @@
-import { Ability, PokemonAbility, PokemonClient, Type, TypeRelations } from "pokenode-ts"
-import { PokemonInfo } from "./interfaces";
+import { Ability, EvolutionChain, EvolutionClient, PokemonAbility, PokemonClient, Type, TypeRelations } from "pokenode-ts"
+import { EvolutionData, PokemonInfo } from "./interfaces";
 
 interface getPokemonDataProps {
     name: string,
     loadedPokemon: PokemonInfo[],
     updateLoadedPokemon: any,
+    loadedEvolutionChains: EvolutionChain[],
+    updateLoadedEvolutionChains: any,
     generateNewPokemon: any
 }
 
@@ -22,29 +24,84 @@ interface getTypeDataProps {
     generateTypeRelations: any
 }
 
-const api = new PokemonClient();
+const pokemonApi = new PokemonClient();
+const evolutionApi = new EvolutionClient();
 
-export const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon} : getPokemonDataProps) => {
+export const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, loadedEvolutionChains, updateLoadedEvolutionChains, generateNewPokemon} : getPokemonDataProps) => {
    
-    const species = await api.getPokemonSpeciesByName(name).then(data => data);
+    // Get Species
+    const species = await pokemonApi.getPokemonSpeciesByName(name).then(data => data);
 
+    // Get Evolution Chain
+    const evoChainId = Number(species.evolution_chain.url.match(/(?<=\/)\d+/)?.at(0));
+    let evoChainData;
+
+    if (loadedEvolutionChains.some(x => x.id == evoChainId)) {
+        evoChainData = loadedEvolutionChains.find(x => x.id == evoChainId)!;
+    } else {
+        evoChainData = await evolutionApi.getEvolutionChainById(evoChainId).then(data => data);
+        let newLoadedEvoChains = loadedEvolutionChains;
+        newLoadedEvoChains.push(evoChainData);
+        updateLoadedEvolutionChains(newLoadedEvoChains);
+    }   
+
+    const evoChain: EvolutionData[] = getEvolutionChain(evoChainData);
+
+    // Get All Varieties
     const varieties = species.varieties;
     const varietyList = await Promise.all(
-        varieties.map(variety => api.getPokemonByName(variety.pokemon.name).then(data => data))
+        varieties.map(variety => pokemonApi.getPokemonByName(variety.pokemon.name).then(data => data))
     );
 
     const pokemonInfo = {
         name: name,
         species: species,
         pokemon: varietyList.find(x => x.is_default),
-        varieties: varietyList
+        varieties: varietyList,
+        evolutionChain: evoChain
     } as PokemonInfo;
         
-    let newLoaded = loadedPokemon;
-    newLoaded.push(pokemonInfo);
+    let newLoadedPokemon = loadedPokemon;
+    newLoadedPokemon.push(pokemonInfo);
 
-    updateLoadedPokemon(newLoaded);
+    updateLoadedPokemon(newLoadedPokemon);
     generateNewPokemon(pokemonInfo);
+}
+
+const getEvolutionChain = (chainData: EvolutionChain) => {
+    const evoChain: EvolutionData[] = [];
+    let evoData = chainData.chain;
+
+    do {
+        let numberOfEvolutions = evoData.evolves_to.length;
+
+        let data = {
+            name: evoData.species.name,
+            minLevel: !evoData.evolution_details[0] ? 1 : evoData.evolution_details[0].min_level,
+            trigger: !evoData.evolution_details[0] ? null : evoData.evolution_details[0].trigger.name,
+            item: !evoData.evolution_details[0] ? null : evoData.evolution_details[0].item?.name
+        } as EvolutionData
+
+        evoChain.push(data);
+
+        if (numberOfEvolutions > 1) {
+            for (let i = 1; i < numberOfEvolutions; i++) {
+                const data = {
+                    name: evoData.evolves_to[i].species.name,
+                    minLevel: !evoData.evolves_to[i].evolution_details ? 1 : evoData.evolves_to[i].evolution_details[0].min_level!,
+                    trigger: !evoData.evolves_to[i].evolution_details ? null : evoData.evolves_to[i].evolution_details[0].trigger.name,
+                    item: !evoData.evolves_to[i].evolution_details ? null : evoData.evolves_to[i].evolution_details[0].item?.name!
+                } as EvolutionData;
+
+                evoChain.push(data);
+            }
+        }
+                  
+        evoData = evoData['evolves_to'][0]
+        
+    } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
+
+    return evoChain;
 }
 
 export const getAbilityData = async ({abilities, loadedAbilities, updateLoadedAbilities, generateAbility} : getAbilityDataProps) => {
@@ -61,7 +118,7 @@ export const getAbilityData = async ({abilities, loadedAbilities, updateLoadedAb
     })
 
     const newAbilities = await Promise.all(
-        newAbilityNames.map(name => api.getAbilityByName(name).then(data => data))
+        newAbilityNames.map(name => pokemonApi.getAbilityByName(name).then(data => data))
     );
 
     let newLoaded = loadedAbilities;
@@ -87,7 +144,7 @@ export const getTypeData = async ({types, loadedTypes, updateLoadedTypes, genera
     })
 
     const newTypes = await Promise.all(
-        newTypeNames.map(type => api.getTypeByName(type).then(data => data))
+        newTypeNames.map(type => pokemonApi.getTypeByName(type).then(data => data))
     );
 
     let newLoaded = loadedTypes;

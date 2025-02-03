@@ -1,4 +1,4 @@
-import { PokemonEntry } from "pokenode-ts";
+import { EvolutionChain, PokemonEntry } from "pokenode-ts";
 import Modal from "../modals/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
@@ -10,11 +10,16 @@ interface SelectPokemonModalProps {
     pokedex?: PokemonEntry[];
     loadedPokemon: PokemonInfo[];
     updateLoadedPokemon: (data: any) => void;
+    loadedEvolutionChains: EvolutionChain[];
+    updateLoadedEvolutionChains: (data: any) => void;
     onSubmit: (data: any) => void;
     onClose: () => void;
 }
 
-const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon, onSubmit, onClose}: SelectPokemonModalProps) => {
+const SelectPokemonModal = (
+    {isOpen, pokedex, loadedPokemon, updateLoadedPokemon,
+        loadedEvolutionChains, updateLoadedEvolutionChains, onSubmit, onClose}
+    : SelectPokemonModalProps) => {
     
     const handleClose = () => {
         onClose();
@@ -64,7 +69,7 @@ const SelectPokemonModal = ({isOpen, pokedex, loadedPokemon, updateLoadedPokemon
             pokemonInfo = loadedPokemon.find(x => x.name == name);
             onSubmit(pokemonInfo);
         } else {
-            getPokemonData({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon: onSubmit})
+            getPokemonData({name, loadedPokemon, updateLoadedPokemon, loadedEvolutionChains, updateLoadedEvolutionChains, generateNewPokemon: onSubmit})
         }    
         
         handleClose();

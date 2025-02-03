@@ -1,4 +1,4 @@
-import { PokemonEntry } from "pokenode-ts";
+import { EvolutionChain, PokemonEntry } from "pokenode-ts";
 import { PokemonInfo } from "../../interfaces";
 import { getPokemonData } from "../../utilities";
 
@@ -6,11 +6,14 @@ interface RandomGenerateIndividualButtonProps {
     selectedDex: PokemonEntry[],
     loadedPokemon: PokemonInfo[],
     updateLoadedPokemon: any,
+    loadedEvolutionChains: EvolutionChain[],
+    updateLoadedEvolutionChains: any,
     generateNewPokemon: any
 }
 
 const RandomGenerateIndividualButton = (
-    {selectedDex, loadedPokemon, updateLoadedPokemon, generateNewPokemon: generateNewPokemon} 
+    {selectedDex, loadedPokemon, updateLoadedPokemon, loadedEvolutionChains, 
+        updateLoadedEvolutionChains, generateNewPokemon: generateNewPokemon} 
     : RandomGenerateIndividualButtonProps) => {
         
     function generateRandomNum() {
@@ -21,7 +24,7 @@ const RandomGenerateIndividualButton = (
         if (loadedPokemon.some(x => x.name == name)) {
             generateNewPokemon(loadedPokemon.find(x => x.name == name));
         } else {
-            getPokemonData({name, loadedPokemon, updateLoadedPokemon, generateNewPokemon});
+            getPokemonData({name, loadedPokemon, updateLoadedPokemon, loadedEvolutionChains, updateLoadedEvolutionChains, generateNewPokemon});
         }     
     }
     

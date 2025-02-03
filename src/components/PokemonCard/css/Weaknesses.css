@@ -43,3 +43,10 @@ img {
 .type-icon {
     border-bottom: 1px solid black
 }
+
+.empty-cell {
+    min-width: 50px;
+    text-align: left;
+    border: none;
+    padding: none;
+}
