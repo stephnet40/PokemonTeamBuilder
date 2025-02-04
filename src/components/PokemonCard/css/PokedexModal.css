@@ -1,0 +1,14 @@
+.pokedex-info-header {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+.pokedex-sprites {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.pokedex-sprites img {
+    width: 100%;
+}
