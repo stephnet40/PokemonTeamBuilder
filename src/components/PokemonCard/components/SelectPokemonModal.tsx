@@ -4,6 +4,7 @@ import "../css/Modal.css";
 import { useState } from "react";
 import { PokemonInfo } from "../../interfaces";
 import { getPokemonData } from "../../../utilities/apiUtilities";
+import { formatName } from "../../../utilities/formatUtilities";
 
 interface SelectPokemonModalProps {
     isOpen: boolean;
@@ -54,7 +55,7 @@ const SelectPokemonModal = (
                 <div key={`${letter}-div`}>
                     <select key={`${letter}-dropdown`} value={selectedDropdowns[ind] || ''} disabled={!arr.length} onChange={(e) => handleDropdownChange(ind, e.target.value)}>
                         <option key={`${letter}-default`} className="default" value="">-- {letter.toUpperCase()} --</option>
-                        {arr.map((name: string) => <option key={name} value={name}>{name.replace(/^./, (char: string) => char.toUpperCase())}</option>)}
+                        {arr.map((name: string) => <option key={name} value={name}>{formatName(name)}</option>)}
                     </select>
                 </div>
             )

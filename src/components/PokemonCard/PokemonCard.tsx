@@ -70,7 +70,7 @@ const PokemonCard = (
                 <div className="info">
 
                     <div className="info-header">
-                        <h3 className="name">{formatName(pokemon?.species.name)}</h3>
+                        <h3 className="name">{formatName(pokemon?.name)}</h3>
 
                         <div className="pokemon-select">
                             <button onClick={() => setSelectPokemonModalOpen(true)}>Select</button>
