@@ -1,7 +1,7 @@
 import { Type, TypeRelations } from "pokenode-ts"
 import "../css/Weaknesses.css"
 import { useEffect, useState } from "react"
-import { getTypeData } from "../../utilities"
+import { getTypeData } from "../../apiUtilities"
 
 interface weaknessesProps {
     pokemonTypes: string[],

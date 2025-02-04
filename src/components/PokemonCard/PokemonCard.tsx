@@ -9,6 +9,7 @@ import SelectFormModal from "./components/SelectFormModal";
 import Abilities from "./components/Abilities";
 import Weaknesses from "./components/Weaknesses";
 import EvolutionLine from "./components/EvolutionLine";
+import PokedexModal from "./components/PokedexModal";
 
 interface PokemonCardProps {
     pokemonInfo: PokemonInfo,
@@ -32,6 +33,7 @@ const PokemonCard = (
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
     const [selectFormModalOpen, setSelectFormModalOpen] = useState<boolean>(false);
+    const [pokedexModalOpen, setPokedexModalOpen] = useState<boolean>(false);
     
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
@@ -45,7 +47,7 @@ const PokemonCard = (
         
         const pokemonTypes = pokemon.types.map(item => item.type.name);
         const typesImgSrc = pokemonTypes.map(type => `typeIcons/${type}.png`);
-        const imgSrc = pokemon.sprites.front_default!
+        const imgSrc = pokemon.sprites.other?.home.front_default!;
 
         return (
             <div className="container">
@@ -54,7 +56,12 @@ const PokemonCard = (
                     {pokemonInfo.species.varieties.length > 1 ? 
                         <div>
                         <button onClick={() => setSelectFormModalOpen(true)}>Forms</button>
-                        <SelectFormModal isOpen={selectFormModalOpen} pokemonInfo={pokemonInfo} onSubmit={generateNewPokemon} onClose={() => {setSelectFormModalOpen(false)}}/>    
+                        <SelectFormModal 
+                            isOpen={selectFormModalOpen} 
+                            pokemonInfo={pokemonInfo} 
+                            onSubmit={generateNewPokemon} 
+                            onClose={() => {setSelectFormModalOpen(false)}}
+                        />    
                         </div> : <div></div>
                     }      
                 </div>
@@ -112,6 +119,15 @@ const PokemonCard = (
                         loadedEvolutionChains={loadedEvolutionChains}
                         generateNewPokemon={generateNewPokemon}
                     />
+
+                    <div className="button-modals">
+                        <button onClick={() => setPokedexModalOpen(true)}>Pokedex</button>
+                        <PokedexModal 
+                            isOpen={pokedexModalOpen}
+                            selectedPokemon={pokemonInfo}
+                            onClose={() => setPokedexModalOpen(false)}
+                        />
+                    </div>
                 </div>
             </div>
         );

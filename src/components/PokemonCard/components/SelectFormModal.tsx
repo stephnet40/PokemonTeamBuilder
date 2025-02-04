@@ -35,7 +35,7 @@ const SelectFormModal = ({isOpen, pokemonInfo, onSubmit, onClose} : SelectFormMo
         varieties?.forEach((pokemon: Pokemon) => {
             options.push(
                 <button key={`${pokemon.name}-option`} onClick={() => onSelect(pokemon)}>
-                    <img src={pokemon.sprites.front_default!}></img>
+                    <img src={pokemon.sprites.other?.home.front_default!}></img>
                     <h3>{pokemon.name}</h3>
                 </button>
             )

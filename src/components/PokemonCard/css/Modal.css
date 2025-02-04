@@ -19,3 +19,13 @@ dialog {
 .select-pokemon select {
     width: 100%;
 }
+
+.variety-select {
+    width: 200px;
+    color: black;
+    background-color: white;
+}
+
+.variety-select img {
+    width: 100px;
+}
