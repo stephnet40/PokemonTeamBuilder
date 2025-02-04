@@ -54,10 +54,14 @@ const formatGimmick = (name: string) => {
 
     if (nameArr.includes("Mega")) {
         name = nameArr.filter(x => x != "Mega").join(" ");
-        return `Mega ${name}`;
+        name = `Mega ${name}`;
     }
 
-    name = nameArr.filter(x => x != "Gmax").join(" ");
-    return `Gigantamax ${name}`;
+    if (nameArr.includes("Gmax")) {
+        name = nameArr.filter(x => x != "Gmax").join(" ");
+        name = `Gigantamax ${name}`;
+    }
+    
+    return name
 }
 
