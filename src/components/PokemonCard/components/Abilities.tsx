@@ -1,7 +1,7 @@
 import { Ability, PokemonAbility } from "pokenode-ts"
 import { useEffect, useState } from "react";
 import "../css/Abilities.css"
-import { getAbilityData } from "../../utilities";
+import { getAbilityData } from "../../../utilities/apiUtilities";
 
 interface AbilitiesProps {
     abilityList: PokemonAbility[],

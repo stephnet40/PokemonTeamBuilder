@@ -1,5 +1,5 @@
 import { Ability, EvolutionChain, EvolutionClient, PokemonAbility, PokemonClient, Type, TypeRelations } from "pokenode-ts"
-import { EvolutionData, PokemonInfo } from "./interfaces";
+import { EvolutionData, PokemonInfo } from "../components/interfaces";
 
 interface getPokemonDataProps {
     name: string,

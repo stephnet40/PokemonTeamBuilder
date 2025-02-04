@@ -1,6 +1,6 @@
 import { EvolutionChain, PokemonEntry } from "pokenode-ts";
 import { PokemonInfo } from "../../interfaces";
-import { getPokemonData } from "../../utilities";
+import { getPokemonData } from "../../../utilities/apiUtilities";
 
 interface RandomGenerateIndividualButtonProps {
     selectedDex: PokemonEntry[],
