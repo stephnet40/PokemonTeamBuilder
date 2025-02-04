@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { EvolutionData, PokemonInfo } from "../../interfaces";
 import { EvolutionChain } from "pokenode-ts";
-import { getPokemonDataBulk } from "../../utilities";
+import { getPokemonDataBulk } from "../../../utilities/apiUtilities";
 import "../css/EvolutionLine.css"
 
 interface EvolutionLineProps {
@@ -47,8 +47,13 @@ const EvolutionLine = ({evolutionChain, loadedPokemon, updateLoadedPokemon, load
     }
 
     return (
-        <div className="evolution-chain">
-            {displayEvolutions()}
+        <div className="evolution">
+            <div>
+                Evolution Line
+            </div>
+            <div className="evolution-chain">
+                {displayEvolutions()}
+            </div>
         </div>
     )
 }

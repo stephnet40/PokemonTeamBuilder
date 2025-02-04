@@ -4,6 +4,11 @@ dialog {
     width: 70%;
 }
 
+.select-pokemon-btns {
+    display: flex;
+    justify-content: center;
+}
+
 .default {
     text-align: center;
 }

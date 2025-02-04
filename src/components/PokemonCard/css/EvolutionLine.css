@@ -1,3 +1,9 @@
+.evolution {
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 .evolution-chain {
     width: 100%;
     background-color: rgba(255, 255, 255, .5);

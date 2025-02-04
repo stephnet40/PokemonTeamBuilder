@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
 import { PokemonInfo } from "../../interfaces";
-import { getPokemonData } from "../../apiUtilities";
+import { getPokemonData } from "../../../utilities/apiUtilities";
 
 interface SelectPokemonModalProps {
     isOpen: boolean;
@@ -78,14 +78,15 @@ const SelectPokemonModal = (
     return (
         <Modal
             isOpen={isOpen}
-            hasCloseBtn={true}
-            onClose={handleClose}
         >
             <div className="select-pokemon" key="dropdowns">
                 {pokemonGroups.length ? displayDropdowns() : null}
             </div>
             
-            <button onClick={() => getData(selectedDropdowns.find(x => x !== null)!)} disabled={!selectedDropdowns.find(x => x !== null)}>Select</button>
+            <div className="select-pokemon-btns"> 
+                <button onClick={() => getData(selectedDropdowns.find(x => x !== null)!)} disabled={!selectedDropdowns.find(x => x !== null)}>Select</button>
+                <button className="modal-close-btn" onClick={handleClose}>Close</button>
+            </div>
         </Modal>
     )
 }
