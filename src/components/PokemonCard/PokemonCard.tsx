@@ -10,6 +10,7 @@ import Abilities from "./components/Abilities";
 import Weaknesses from "./components/Weaknesses";
 import EvolutionLine from "./components/EvolutionLine";
 import PokedexModal from "./components/PokedexModal";
+import { formatName } from "../../utilities/formatUtilities";
 
 interface PokemonCardProps {
     pokemonInfo: PokemonInfo,
@@ -47,7 +48,7 @@ const PokemonCard = (
         
         const pokemonTypes = pokemon.types.map(item => item.type.name);
         const typesImgSrc = pokemonTypes.map(type => `typeIcons/${type}.png`);
-        const imgSrc = pokemon.sprites.other?.home.front_default!;
+        const imgSrc = pokemon.sprites.other?.["official-artwork"].front_default!;
 
         return (
             <div className="container">
@@ -69,7 +70,7 @@ const PokemonCard = (
                 <div className="info">
 
                     <div className="info-header">
-                        <h3 className="name">{pokemon?.species.name.replace(/^./, char => char.toUpperCase())}</h3>
+                        <h3 className="name">{formatName(pokemon?.species.name)}</h3>
 
                         <div className="pokemon-select">
                             <button onClick={() => setSelectPokemonModalOpen(true)}>Select</button>
@@ -124,7 +125,8 @@ const PokemonCard = (
                         <button onClick={() => setPokedexModalOpen(true)}>Pokedex</button>
                         <PokedexModal 
                             isOpen={pokedexModalOpen}
-                            selectedPokemon={pokemonInfo}
+                            species={pokemonInfo.species}
+                            pokemon={pokemon}
                             onClose={() => setPokedexModalOpen(false)}
                         />
                     </div>

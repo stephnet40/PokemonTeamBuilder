@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import "../css/PokemonCard.css"
+import "../css/PokemonCard.css";
+import "../css/Modal.css"
 interface ModalProps {
     isOpen: boolean;
     hasCloseBtn?: boolean;
@@ -36,12 +37,12 @@ const Modal = ({isOpen, hasCloseBtn, onClose, children} : ModalProps) => {
 
     return (
         <dialog ref={modalRef} className="modal" onKeyDown={handleKeyDown}>
+            {children}
             {hasCloseBtn && (
                 <button className="modal-close-btn" onClick={handleCloseModal}>
                     Close
                 </button>
             )}
-            {children}
         </dialog>
     )
 }

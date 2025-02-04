@@ -1,6 +1,8 @@
 import { Pokemon } from "pokenode-ts";
 import Modal from "../modals/Modal";
 import { PokemonInfo } from "../../interfaces";
+import "../css/Modal.css"
+import { formatName } from "../../../utilities/formatUtilities";
 
 interface SelectFormModalProps {
     isOpen: boolean;
@@ -34,9 +36,9 @@ const SelectFormModal = ({isOpen, pokemonInfo, onSubmit, onClose} : SelectFormMo
         let options: any = [];
         varieties?.forEach((pokemon: Pokemon) => {
             options.push(
-                <button key={`${pokemon.name}-option`} onClick={() => onSelect(pokemon)}>
-                    <img src={pokemon.sprites.other?.home.front_default!}></img>
-                    <h3>{pokemon.name}</h3>
+                <button className="variety-select" key={`${pokemon.name}-option`} onClick={() => onSelect(pokemon)}>
+                    <img src={pokemon.sprites.other?.["official-artwork"].front_default!}></img>
+                    <h3>{formatName(pokemon.name)}</h3>
                 </button>
             )
         })
