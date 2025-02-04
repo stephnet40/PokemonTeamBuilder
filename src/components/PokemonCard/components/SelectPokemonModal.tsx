@@ -24,6 +24,9 @@ const SelectPokemonModal = (
     
     const handleClose = () => {
         onClose();
+        
+        // Clear dropdown selection
+        setSelectedDropdown(new Array(26).fill(null))
     }
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
