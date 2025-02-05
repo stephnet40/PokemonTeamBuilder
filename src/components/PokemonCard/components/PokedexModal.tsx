@@ -36,7 +36,10 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
         return map;
     }, new Map())
 
-    //const games = flavorTextArr
+    const gamesPresent = flavorTextArr.reduce((arr, item) => {
+        arr.push(item.version.name);
+        return arr;
+    }, new Array())
 
     const normalSpriteSrc = pokemon.sprites.other?.["official-artwork"].front_default!;
     const shinySpriteSrc = pokemon.sprites.other?.["official-artwork"].front_shiny!;
@@ -102,15 +105,22 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
                 </div>
                 <div>
                     <TabList activeTabIndex={0}>
-                        {genList.map(gen => 
-                            <TabItem key={`${pokemon.name}-${gen}`} label={gen}>  
-                                <table className="dex-entries">
-                                    <tbody>
-                                        {displayDexEntries(gen)}
-                                    </tbody>
-                                </table>
-                            </TabItem>
-                        )}
+                        {genList.map(gen => { 
+                            const gamesGen = generations.find(x => x.id == gen)?.games;
+                            if (gamesGen?.some(game => gamesPresent.includes(game))) {
+                                return (
+                                    <TabItem key={`${pokemon.name}-${gen}`} label={gen}>  
+                                        <table className="dex-entries">
+                                            <tbody>
+                                                {displayDexEntries(gen)}
+                                            </tbody>
+                                        </table>
+                                    </TabItem>
+                                )
+                            } else {
+                                return <div></div>
+                            }   
+                        })}
                     </TabList>
                 </div>
                 
