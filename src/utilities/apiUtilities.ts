@@ -154,24 +154,18 @@ const getEvolutionChain = (chainData: EvolutionChain) => {
 export const getAbilityData = async ({abilities, loadedAbilities, updateLoadedAbilities, generateAbility} : getAbilityDataProps) => {
 
     let abilityList: Ability[] = [];
-    const newAbilityNames: string[] = [];
-
-    abilities.forEach((item) => {
-        if (loadedAbilities.some(x => x.name == item.ability.name)) {
-            abilityList.push(loadedAbilities.find(x => x.name == item.ability.name)!);
-        } else {
-            newAbilityNames.push(item.ability.name);
-        }
-    })
-
-    const newAbilities = await Promise.all(
-        newAbilityNames.map(name => pokemonApi.getAbilityByName(name).then(data => data))
-    );
-
     let newLoaded = loadedAbilities;
-    newLoaded.push(...newAbilities);
 
-    abilityList.push(...newAbilities);
+    for (let i = 0; i < abilities.length; i++) {
+        const item = abilities[i];
+        if (!loadedAbilities.some(x => x.name == item.ability.name)) {
+            const newAbility = await pokemonApi.getAbilityByName(item.ability.name).then(data => data);
+            newLoaded.push(newAbility);
+            abilityList.push(newAbility);
+        } else {
+            abilityList.push(loadedAbilities.find(x => x.name == item.ability.name)!);
+        }
+    }
 
     updateLoadedAbilities(newLoaded);
     generateAbility(abilityList);
