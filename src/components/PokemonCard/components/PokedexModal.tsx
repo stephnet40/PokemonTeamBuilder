@@ -109,7 +109,7 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
                             const gamesGen = generations.find(x => x.id == gen)?.games;
                             if (gamesGen?.some(game => gamesPresent.includes(game))) {
                                 return (
-                                    <TabItem key={`${pokemon.name}-${gen}`} label={gen}>  
+                                    <TabItem key={`${pokemon.name}-${gen}`} label={gen.replace(/^./, char => char.toUpperCase()).split(/(\w+)(\d+)/).join(" ")}>  
                                         <table className="dex-entries">
                                             <tbody>
                                                 {displayDexEntries(gen)}
