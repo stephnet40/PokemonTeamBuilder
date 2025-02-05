@@ -78,3 +78,9 @@ button {
     width: 65px;
 }
 
+.button-modals {
+    display: flex;
+    justify-content: start;
+    margin-top: 8px;
+}
+

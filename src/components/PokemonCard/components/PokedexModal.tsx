@@ -88,6 +88,7 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
     return (
         <Modal
             isOpen={isOpen}
+            modalClass="pokedex-modal"
             hasCloseBtn={true}
             onClose={handleClose}
         >
@@ -99,8 +100,8 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
                     </div>
                     <div>
                         <h2>{formatName(pokemon.name)}</h2>
-                        <div>Height: {convertHeight(pokemon.height)}</div>
-                        <div>Weight: {convertWeight(pokemon.weight)}</div>
+                        <div><span className="pokedex-label">Height: </span>{convertHeight(pokemon.height)}</div>
+                        <div><span className="pokedex-label">Weight: </span>{convertWeight(pokemon.weight)}</div>
                     </div>
                 </div>
                 <div>

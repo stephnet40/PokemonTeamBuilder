@@ -1,6 +1,7 @@
 import { EvolutionChain, PokemonEntry } from "pokenode-ts";
 import Modal from "../layout/Modal";
 import "../css/Modal.css";
+import "../css/SelectPokemonModal.css"
 import { useState } from "react";
 import { PokemonInfo } from "../../../types/PokemonInfo";
 import { getPokemonData } from "../../../utilities/apiUtilities";
@@ -82,12 +83,13 @@ const SelectPokemonModal = (
     return (
         <Modal
             isOpen={isOpen}
+            modalClass="select-pokemon-modal"
         >
             <div className="select-pokemon" key="dropdowns">
                 {pokemonGroups.length ? displayDropdowns() : null}
             </div>
             
-            <div className="select-pokemon-btns"> 
+            <div className="modal-bottom-btns"> 
                 <button onClick={() => getData(selectedDropdowns.find(x => x !== null)!)} disabled={!selectedDropdowns.find(x => x !== null)}>Select</button>
                 <button className="modal-close-btn" onClick={handleClose}>Close</button>
             </div>

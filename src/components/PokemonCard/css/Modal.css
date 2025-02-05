@@ -5,33 +5,29 @@ dialog {
     background-color: #d8d7d7;
 }
 
-.select-pokemon-btns {
+dialog.select-pokemon-modal {
+    height: 250px;
+}
+
+dialog.pokedex-modal {
+    height: 500px;
+}
+
+.modal-container {
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    flex: 1;
 }
 
-.default {
-    text-align: center;
+.modal-bottom-btns {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+    margin-top: auto;
 }
 
-.select-pokemon {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
-    gap: 20px;
-    justify-content: space-between;
-}
-
-.select-pokemon select {
-    width: 100%;
-}
-
-.variety-select {
-    width: 200px;
-    color: black;
-    background-color: white;
-}
-
-.variety-select img {
+.modal-bottom-btns button {
     width: 100px;
 }
+

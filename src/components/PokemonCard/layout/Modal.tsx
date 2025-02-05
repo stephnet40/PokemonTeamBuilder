@@ -3,12 +3,13 @@ import "../css/PokemonCard.css";
 import "../css/Modal.css"
 interface ModalProps {
     isOpen: boolean;
+    modalClass: string;
     hasCloseBtn?: boolean;
     onClose?: () => void;
     children: React.ReactNode;
 }
 
-const Modal = ({isOpen, hasCloseBtn, onClose, children} : ModalProps) => {
+const Modal = ({isOpen, modalClass, hasCloseBtn, onClose, children} : ModalProps) => {
     
     const modalRef = useRef<HTMLDialogElement>(null);
     
@@ -36,13 +37,17 @@ const Modal = ({isOpen, hasCloseBtn, onClose, children} : ModalProps) => {
     }
 
     return (
-        <dialog ref={modalRef} className="modal" onKeyDown={handleKeyDown}>
-            {children}
-            {hasCloseBtn && (
-                <button className="modal-close-btn" onClick={handleCloseModal}>
-                    Close
-                </button>
-            )}
+        <dialog ref={modalRef} className={modalClass} onKeyDown={handleKeyDown}>
+            <div className="modal-container">
+                {children}
+                {hasCloseBtn && (
+                    <div className="modal-bottom-btns">
+                        <button className="modal-close-btn" onClick={handleCloseModal}>
+                        Close
+                        </button>
+                    </div>
+                )}
+            </div>
         </dialog>
     )
 }
