@@ -1,8 +1,8 @@
 import { EvolutionChain, PokemonEntry } from "pokenode-ts";
-import Modal from "../modals/Modal";
+import Modal from "../layout/Modal";
 import "../css/Modal.css";
 import { useState } from "react";
-import { PokemonInfo } from "../../interfaces";
+import { PokemonInfo } from "../../../types/PokemonInfo";
 import { getPokemonData } from "../../../utilities/apiUtilities";
 import { formatName } from "../../../utilities/formatUtilities";
 

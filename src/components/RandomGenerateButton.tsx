@@ -1,5 +1,5 @@
 import { PokemonClient, PokemonEntry } from "pokenode-ts";
-import { PokemonInfo } from "./interfaces";
+import { PokemonInfo } from "../types/PokemonInfo";
 
 const RandomGenerateButton = ({selectedDex, loadedPokemon, updateLoadedPokemon, generatePokemon: generatePokemon} : {selectedDex: PokemonEntry[], loadedPokemon: PokemonInfo[], updateLoadedPokemon: any, generatePokemon: any}) => {
     

@@ -4,7 +4,7 @@ import PokemonCard from './components/PokemonCard/PokemonCard'
 //import RandomGenerateButton from './components/RandomGenerateButton'
 import { Ability, EvolutionChain, GameClient, Pokedex, PokemonEntry, Type } from 'pokenode-ts';
 import PokedexSelect from './components/PokedexSelect/PokedexSelect';
-import { PokemonInfo } from './components/interfaces';
+import { PokemonInfo } from './types/PokemonInfo';
 
 function App() {
   // const [pokemonList, setPokemonList] = useState<PokemonInfo[]>(new Array(6).fill(null));

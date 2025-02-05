@@ -4,7 +4,7 @@ import RandomGenerateIndividualButton from "./components/RandomGenerateIndividua
 import StatBars from "./components/StatBars";
 import { useState } from "react";
 import SelectPokemonModal from "./components/SelectPokemonModal";
-import { PokemonInfo } from "../interfaces";
+import { PokemonInfo } from "../../types/PokemonInfo";
 import SelectFormModal from "./components/SelectFormModal";
 import Abilities from "./components/Abilities";
 import Weaknesses from "./components/Weaknesses";

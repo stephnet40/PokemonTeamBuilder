@@ -1,6 +1,6 @@
 import { Pokemon } from "pokenode-ts";
-import Modal from "../modals/Modal";
-import { PokemonInfo } from "../../interfaces";
+import Modal from "../layout/Modal";
+import { PokemonInfo } from "../../../types/PokemonInfo";
 import "../css/Modal.css"
 import { formatName } from "../../../utilities/formatUtilities";
 

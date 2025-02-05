@@ -10,5 +10,23 @@
 }
 
 .pokedex-sprites img {
+    width: 150px;
+}
+
+.dex-entries {
     width: 100%;
+}
+
+.dex-entries td {
+    font-size: 14px;
+}
+
+.game-titles {
+    width: 25%;
+    font-weight: bold;
+}
+
+.dex-description {
+    text-align: left;
+    padding: 4px 8px;
 }

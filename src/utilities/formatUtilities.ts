@@ -1,3 +1,31 @@
+// Format Game Titles
+export const formatGames = (games: string) => {
+    games = games.replace(/,$/, "");
+
+    // Check Let's Go games
+    if (games.includes("lets")) games = games.replace(/lets/g, "let's");
+
+    // Check combination titles
+    const substrs = ["rer", "fg", "tg", "ls"];
+    if (substrs.some(x => games.includes(x))) {
+        games = games.replace("rer", "reR").replace("fg", "fG").replace("tg","tG").replace("ls", "lS");
+    }
+
+    let gamesArr = games.split(",");
+    
+    games = gamesArr.map(x => x.split("-")
+                    .map(y => y.replace(/^./, char => char.toUpperCase()))
+                    .join(" "))
+                    .join(", ");
+    return games;
+}
+
+export const formatDexEntry = (text: string) => {
+    text = text.replace(/[\u000c]/g, " ");
+    return text;
+}
+
+// Format Pokemon Names
 export const formatName = (name: string) => {
 
     // Check for Treasures of Ruin

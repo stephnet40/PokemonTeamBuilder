@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EvolutionData, PokemonInfo } from "../../interfaces";
+import { EvolutionData, PokemonInfo } from "../../../types/PokemonInfo";
 import { EvolutionChain } from "pokenode-ts";
 import { getPokemonDataBulk } from "../../../utilities/apiUtilities";
 import "../css/EvolutionLine.css"

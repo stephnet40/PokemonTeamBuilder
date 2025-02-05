@@ -2,6 +2,7 @@ dialog {
     position: relative;
     z-index: 2;
     width: 70%;
+    background-color: #d8d7d7;
 }
 
 .select-pokemon-btns {
