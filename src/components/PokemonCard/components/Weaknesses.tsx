@@ -74,7 +74,7 @@ const Weaknesses = ({pokemonTypes, loadedTypes, updateLoadedTypes} : weaknessesP
 
     return (
         <div>
-            <div className="chart-type">Weaknesses</div>
+            <div className="table-title">Weaknesses</div>
             <table className="type-chart">
                 <tbody>
                     <tr>
@@ -83,7 +83,7 @@ const Weaknesses = ({pokemonTypes, loadedTypes, updateLoadedTypes} : weaknessesP
                 </tbody>
             </table>
 
-            <div className="chart-type">Resistances</div>
+            <div className="table-title">Resistances</div>
             <table className="type-chart">
                 <tbody>
                     <tr>
@@ -92,7 +92,7 @@ const Weaknesses = ({pokemonTypes, loadedTypes, updateLoadedTypes} : weaknessesP
                 </tbody>
             </table>
 
-            <div className="chart-type">Immunities</div>
+            <div className="table-title">Immunities</div>
             <table className="type-chart">
                 <tbody>
                     <tr>

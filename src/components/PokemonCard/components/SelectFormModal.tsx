@@ -49,6 +49,7 @@ const SelectFormModal = ({isOpen, pokemonInfo, onSubmit, onClose} : SelectFormMo
     return (
         <Modal
             isOpen={isOpen}
+            modalClass="select-form-modal"
             hasCloseBtn={true}
             onClose={handleClose}
         >

@@ -70,48 +70,52 @@ const PokemonCard = (
                 <div className="info">
 
                     <div className="info-header">
-                        <h3 className="name">{formatName(pokemon?.name)}</h3>
+                        <div>
+                            <h3 className="name">{formatName(pokemon?.name)}</h3>
 
-                        <div className="pokemon-select">
-                            <button onClick={() => setSelectPokemonModalOpen(true)}>Select</button>
-                            <SelectPokemonModal 
-                                isOpen={selectPokemonModalOpen} 
-                                pokedex={selectedDex} 
-                                loadedPokemon={loadedPokemon}
-                                updateLoadedPokemon={updateLoadedPokemon}
-                                loadedEvolutionChains={loadedEvolutionChains}
-                                updateLoadedEvolutionChains={updateLoadedEvolutionChains}
-                                onSubmit={generateNewPokemon} 
-                                onClose={() => setSelectPokemonModalOpen(false)}
-                            />
-                            
-                            <RandomGenerateIndividualButton 
-                                selectedDex={selectedDex} 
-                                loadedPokemon={loadedPokemon}
-                                updateLoadedPokemon={updateLoadedPokemon}
-                                loadedEvolutionChains={loadedEvolutionChains}
-                                updateLoadedEvolutionChains={updateLoadedEvolutionChains}
-                                generateNewPokemon={generateNewPokemon}
-                            />
+                            <div className="pokemon-select">
+                                <button onClick={() => setSelectPokemonModalOpen(true)}>Select</button>
+                                <SelectPokemonModal 
+                                    isOpen={selectPokemonModalOpen} 
+                                    pokedex={selectedDex} 
+                                    loadedPokemon={loadedPokemon}
+                                    updateLoadedPokemon={updateLoadedPokemon}
+                                    loadedEvolutionChains={loadedEvolutionChains}
+                                    updateLoadedEvolutionChains={updateLoadedEvolutionChains}
+                                    onSubmit={generateNewPokemon} 
+                                    onClose={() => setSelectPokemonModalOpen(false)}
+                                />
+                                
+                                <RandomGenerateIndividualButton 
+                                    selectedDex={selectedDex} 
+                                    loadedPokemon={loadedPokemon}
+                                    updateLoadedPokemon={updateLoadedPokemon}
+                                    loadedEvolutionChains={loadedEvolutionChains}
+                                    updateLoadedEvolutionChains={updateLoadedEvolutionChains}
+                                    generateNewPokemon={generateNewPokemon}
+                                />
+                            </div>
                         </div>
+
+                        <div className="type-list">
+                            {typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}
+                        </div>
+                    </div>               
+
+                    <div className="main-data">
+                            <Abilities 
+                                abilityList={pokemonAbilities} 
+                                loadedAbilities={loadedAbilities}
+                                updateLoadedAbilities={updateLoadedAbilities}
+                            />
+
+                            <StatBars statsArr={pokemonStats} />
+                            <Weaknesses 
+                                pokemonTypes={pokemonTypes}
+                                loadedTypes={loadedTypes}
+                                updateLoadedTypes={updateLoadedTypes}
+                            />
                     </div>
-
-                    <div className="type-list">
-                        {typesImgSrc.map((type, index) => <img key={index} src={type}></img>)}
-                    </div>
-
-                    <Abilities 
-                        abilityList={pokemonAbilities} 
-                        loadedAbilities={loadedAbilities}
-                        updateLoadedAbilities={updateLoadedAbilities}
-                    />
-
-                    <StatBars statsArr={pokemonStats} />
-                    <Weaknesses 
-                        pokemonTypes={pokemonTypes}
-                        loadedTypes={loadedTypes}
-                        updateLoadedTypes={updateLoadedTypes}
-                    />
 
                     <EvolutionLine 
                         evolutionChain={pokemonInfo.evolutionChain}

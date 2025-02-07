@@ -36,8 +36,11 @@ const StatBars = ({statsArr} : StatBarsProps) => {
 
      
     return (
-        <div className="stats">
-            {statsArr.length ? displayStats() : null}
+        <div className="stat-container">
+            <div className="table-title">Base Stats</div>
+            <div className="stats">
+                {statsArr.length ? displayStats() : null}
+            </div>
         </div>
     )
 

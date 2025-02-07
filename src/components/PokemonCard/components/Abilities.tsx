@@ -44,11 +44,14 @@ const Abilities = ({abilityList, loadedAbilities, updateLoadedAbilities} : Abili
     }
 
     return (
-        <table className="ability-list">
-            <tbody>
-                {currAbility.length ? displayAbilities() : null}
-            </tbody>
-        </table>
+        <div>
+            <div className="table-title">Abilities</div>
+            <table className="ability-list">
+                <tbody>
+                    {currAbility.length ? displayAbilities() : null}
+                </tbody>
+            </table>
+        </div>
     )
 }
 
