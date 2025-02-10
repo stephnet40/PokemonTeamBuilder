@@ -70,11 +70,11 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
             ind++;
             if (games.length) {
                 dexEntries.push(
-                    <tr key={`flavor-text-${ind}`}>
-                        <td className="game-titles">
+                    <tr key={`flavor-text-${gen}-${ind}`}>
+                        <td key={`game-titles-${ind}`} className="game-titles">
                             {formatGames(games)}
                         </td>
-                        <td className="dex-description">
+                        <td key={`dex-dexcription-${gen}-${ind}`} className="dex-description">
                             {formatDexEntry(text)}
                         </td>
                     </tr>
@@ -111,15 +111,15 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
                             if (gamesGen?.some(game => gamesPresent.includes(game))) {
                                 return (
                                     <TabItem key={`${pokemon.name}-${gen}`} label={gen.replace(/^./, char => char.toUpperCase()).split(/(\w+)(\d+)/).join(" ")}>  
-                                        <table className="dex-entries">
-                                            <tbody>
+                                        <table key={`${pokemon.name}-${gen}-table`} className="dex-entries">
+                                            <tbody key={`${pokemon.name}-${gen}-tbody`}>
                                                 {displayDexEntries(gen)}
                                             </tbody>
                                         </table>
                                     </TabItem>
                                 )
                             } else {
-                                return <div></div>
+                                return <div key={`${pokemon.name}-${gen}`}></div>
                             }   
                         })}
                     </TabList>
