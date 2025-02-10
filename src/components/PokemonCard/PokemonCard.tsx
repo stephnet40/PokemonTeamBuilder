@@ -1,4 +1,4 @@
-import { Ability, EvolutionChain, PokemonEntry, Type } from "pokenode-ts";
+import { Ability, EvolutionChain, Move, PokemonEntry, Type } from "pokenode-ts";
 import './css/PokemonCard.css';
 import RandomGenerateIndividualButton from "./components/RandomGenerateIndividualButton";
 import StatBars from "./components/StatBars";
@@ -24,19 +24,22 @@ interface PokemonCardProps {
     loadedAbilities: Ability[],
     updateLoadedAbilities: any,
     loadedTypes: Type[],
-    updateLoadedTypes: any
+    updateLoadedTypes: any,
+    loadedMoves: Move[],
+    updateLoadedMoves: any
 }
 
 const PokemonCard = (
     {pokemonInfo, selectedDex, setPokemon, loadedPokemon, updateLoadedPokemon, 
         loadedEvolutionChains, updateLoadedEvolutionChains, loadedAbilities, updateLoadedAbilities, 
-        loadedTypes, updateLoadedTypes} 
+        loadedTypes, updateLoadedTypes, loadedMoves, updateLoadedMoves} 
     : PokemonCardProps ) => {
 
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
     const [selectFormModalOpen, setSelectFormModalOpen] = useState<boolean>(false);
     const [pokedexModalOpen, setPokedexModalOpen] = useState<boolean>(false);
     const [movesModalOpen, setMovesModalOpen] = useState<boolean>(false);
+    const [moveLearnMethod, setMoveLearnMethod] = useState<string>("level-up");
     
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
@@ -47,7 +50,6 @@ const PokemonCard = (
 
         const pokemonAbilities = pokemon.abilities;
         const pokemonStats = pokemon.stats;
-        
         const pokemonTypes = pokemon.types.map(item => item.type.name);
         const typesImgSrc = pokemonTypes.map(type => `typeIcons/${type}.png`);
         const imgSrc = pokemon.sprites.other?.["official-artwork"].front_default!;
@@ -136,12 +138,18 @@ const PokemonCard = (
                             onClose={() => setPokedexModalOpen(false)}
                         />
 
-                        <button onClick={() => setMovesModalOpen(true)}>Moves</button>
+                        <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("level-up")}}>Level Up Moves</button>
+                        <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("machine")}}>TM/HM Moves</button>
+                        <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("tutor")}}>Tutor Moves</button>
                         <MovesModal
                             isOpen={movesModalOpen}
-                            movesList={pokemon.moves}
+                            learnMethod={moveLearnMethod}
+                            pokemonInfo={pokemonInfo}
+                            loadedMoves={loadedMoves}
+                            updateLoadedMoves={updateLoadedMoves}
                             onClose={() => setMovesModalOpen(false)} 
                         />
+                        
                     </div>
                 </div>
             </div>

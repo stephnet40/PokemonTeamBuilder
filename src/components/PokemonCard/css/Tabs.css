@@ -1,9 +1,8 @@
 .tab-list {
     width: fit-content;
     min-width: 100%;
-    background-color: #d8d7d7;
     display: flex;
-    gap: .5em;   
+    flex-wrap: wrap; 
     border-bottom: 2px solid black;
     padding: 0;
     margin: 0;
@@ -12,4 +11,10 @@
 .tab-list li {
     display: block;
     margin-bottom: -2px;
+}
+
+.tab-list li button {
+    color: black;
+    background-color: #d8d7d7;
+    border: 1px solid black;
 }

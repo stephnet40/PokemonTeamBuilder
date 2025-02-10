@@ -1,4 +1,4 @@
-import { Pokemon, PokemonSpecies } from "pokenode-ts";
+import { Move, Pokemon, PokemonSpecies } from "pokenode-ts";
 
 export interface PokemonInfo {
   name: string;
@@ -6,6 +6,7 @@ export interface PokemonInfo {
   species: PokemonSpecies;
   varieties: Pokemon[];
   evolutionChain: EvolutionData[];
+  moves: MoveDetails[];
 }
 
 export interface EvolutionData {
@@ -14,4 +15,11 @@ export interface EvolutionData {
   minLevel: number;
   trigger: string | null;
   item: string | null;
+}
+
+export interface MoveDetails {
+  move?: Move;
+  level: number;
+  learnMethod: string;
+  versionGroup: string;
 }

@@ -1,5 +1,5 @@
-import { Ability, EvolutionChain, EvolutionClient, PokemonAbility, PokemonClient, Type, TypeRelations } from "pokenode-ts"
-import { EvolutionData, PokemonInfo } from "../types/PokemonInfo";
+import { Ability, EvolutionChain, EvolutionClient, Move, MoveClient, PokemonAbility, PokemonClient, PokemonMove, Type, TypeRelations } from "pokenode-ts"
+import { EvolutionData, MoveDetails, PokemonInfo } from "../types/PokemonInfo";
 
 interface getPokemonDataProps {
     name: string,
@@ -32,8 +32,17 @@ interface getTypeDataProps {
     generateTypeRelations: any
 }
 
+interface getMoveDataProps {
+    moves: PokemonMove[],
+    learnMethod: string,
+    loadedMoves: Move[],
+    updateLoadedMoves: any,
+    generateMoves: any
+}
+
 const pokemonApi = new PokemonClient();
 const evolutionApi = new EvolutionClient();
+const moveApi = new MoveClient();
 
 export const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, loadedEvolutionChains, updateLoadedEvolutionChains, generateNewPokemon} : getPokemonDataProps) => {
    
@@ -66,7 +75,8 @@ export const getPokemonData = async ({name, loadedPokemon, updateLoadedPokemon, 
         species: species,
         pokemon: varietyList.find(x => x.is_default),
         varieties: varietyList,
-        evolutionChain: evoChain
+        evolutionChain: evoChain,
+        moves: []
     } as PokemonInfo;
     let newLoadedPokemon = loadedPokemon;
     newLoadedPokemon.push(pokemonInfo);
@@ -98,7 +108,8 @@ export const getPokemonDataBulk = async ({names, loadedPokemon, updateLoadedPoke
                 species: newSpecies,
                 pokemon: varietyList.find(x => x.is_default),
                 varieties: varietyList,
-                evolutionChain: evoChain
+                evolutionChain: evoChain,
+                moves: []
             } as PokemonInfo;
             
             newLoadedPokemon.push(info);
@@ -197,6 +208,37 @@ export const getTypeData = async ({types, loadedTypes, updateLoadedTypes, genera
 
     updateLoadedTypes(newLoaded);
     generateTypeRelations(typeRelations);
+}
+
+export const getMoveData = async ({moves, learnMethod, loadedMoves, updateLoadedMoves, generateMoves} : getMoveDataProps) => {
+
+    let moveDetails: MoveDetails[] = [];
+    let newLoadedMoves = loadedMoves;
+    
+    for (let i = 0; i < moves.length; i++) {
+        const moveName = moves[i].move.name;
+        let move: Move;
+        if (!loadedMoves.some(x => x.name == moveName)) {
+            move = await moveApi.getMoveByName(moveName).then(data => data);
+            newLoadedMoves.push(move);
+        } else {
+            move = loadedMoves.find(x => x.name == moveName)!;
+        }
+        
+        const allVersions = moves[i].version_group_details.filter(x => x.move_learn_method.name == learnMethod);
+        allVersions.forEach(item => {
+            const details = {
+                move: move,
+                level: item.level_learned_at,
+                learnMethod: learnMethod,
+                versionGroup: item.version_group.name
+            } as MoveDetails
+            moveDetails.push(details);
+        })
+    }
+
+    updateLoadedMoves(newLoadedMoves);
+    generateMoves(moveDetails);
 }
 
 
