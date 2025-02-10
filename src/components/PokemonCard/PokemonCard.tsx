@@ -11,6 +11,7 @@ import Weaknesses from "./components/Weaknesses";
 import EvolutionLine from "./components/EvolutionLine";
 import PokedexModal from "./components/PokedexModal";
 import { formatName } from "../../utilities/formatUtilities";
+import MovesModal from "./components/MovesModal";
 
 interface PokemonCardProps {
     pokemonInfo: PokemonInfo,
@@ -35,6 +36,7 @@ const PokemonCard = (
     const [selectPokemonModalOpen, setSelectPokemonModalOpen] = useState<boolean>(false);
     const [selectFormModalOpen, setSelectFormModalOpen] = useState<boolean>(false);
     const [pokedexModalOpen, setPokedexModalOpen] = useState<boolean>(false);
+    const [movesModalOpen, setMovesModalOpen] = useState<boolean>(false);
     
     const generateNewPokemon = (data: any) => {
         setPokemon(data);
@@ -132,6 +134,13 @@ const PokemonCard = (
                             species={pokemonInfo.species}
                             pokemon={pokemon}
                             onClose={() => setPokedexModalOpen(false)}
+                        />
+
+                        <button onClick={() => setMovesModalOpen(true)}>Moves</button>
+                        <MovesModal
+                            isOpen={movesModalOpen}
+                            movesList={pokemon.moves}
+                            onClose={() => setMovesModalOpen(false)} 
                         />
                     </div>
                 </div>

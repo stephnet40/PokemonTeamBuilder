@@ -107,6 +107,7 @@ button {
 .button-modals {
     display: flex;
     justify-content: start;
+    gap: 10px;
     margin-top: 8px;
 }
 
