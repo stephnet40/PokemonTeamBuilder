@@ -1,5 +1,5 @@
 // Format Game Titles
-export const formatGames = (games: string) => {
+export const formatGamesPokedex = (games: string) => {
     games = games.replace(/,$/, "");
 
     // Check Let's Go games
@@ -23,6 +23,32 @@ export const formatGames = (games: string) => {
 export const formatDexEntry = (text: string) => {
     text = text.replace(/[\u000c]/g, " ");
     return text;
+}
+
+export const formatVersionTitles = (versions: string) => {
+    versions = versions.replace("-and-", "-");
+
+    // Check Let's Go games
+    if (versions.includes("lets")) versions = versions.replace(/lets/g, "let's");
+
+    // Check combination titles
+    const substrs = ["rer", "fg", "tg", "ls"];
+    if (substrs.some(x => versions.includes(x))) {
+        versions = versions.replace("rer", "reR").replace("fg", "fG").replace("tg","tG").replace("ls", "lS");
+    }
+
+    let versionsArr = versions.split("-").map(x => x.replace(/^./, char => char.toUpperCase()));
+
+    if (versionsArr.length <= 2) {
+        versions = versionsArr.includes("Arceus") ? versionsArr.join(" ") : versionsArr.join("/");
+    } else {
+        const titleLength = Math.floor(versionsArr.length / 2);
+        const firstHalf = versionsArr.slice(0, titleLength).join(" ");
+        const secondHalf = versionsArr.slice(titleLength).join(" ");
+        versions = `${firstHalf}/${secondHalf}` 
+    }
+
+    return versions;
 }
 
 // Format Pokemon Names

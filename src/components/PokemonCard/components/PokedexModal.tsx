@@ -1,7 +1,7 @@
 import Modal from "../layout/Modal";
 import "../css/PokedexModal.css"
 import { Pokemon, PokemonSpecies } from "pokenode-ts";
-import { formatDexEntry, formatGames, formatName } from "../../../utilities/formatUtilities";
+import { formatDexEntry, formatGamesPokedex, formatName } from "../../../utilities/formatUtilities";
 import TabList from "../layout/Tabs/TabList";
 import TabItem from "../layout/Tabs/TabItem";
 
@@ -72,7 +72,7 @@ const PokedexModal = ({isOpen, species, pokemon, onClose} : PokedexModalProps) =
                 dexEntries.push(
                     <tr key={`flavor-text-${gen}-${ind}`}>
                         <td key={`game-titles-${ind}`} className="game-titles">
-                            {formatGames(games)}
+                            {formatGamesPokedex(games)}
                         </td>
                         <td key={`dex-dexcription-${gen}-${ind}`} className="dex-description">
                             {formatDexEntry(text)}

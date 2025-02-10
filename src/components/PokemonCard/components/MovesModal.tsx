@@ -5,6 +5,7 @@ import { MoveDetails, PokemonInfo } from "../../../types/PokemonInfo";
 import { getMoveData } from "../../../utilities/apiUtilities";
 import TabList from "../layout/Tabs/TabList";
 import TabItem from "../layout/Tabs/TabItem";
+import { formatVersionTitles } from "../../../utilities/formatUtilities";
 
 interface MovesModalProps {
     isOpen: boolean;
@@ -59,7 +60,7 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
                     <TabList activeTabIndex={0}>
                         {versionGroups.map(version => {
                             return (
-                                <TabItem key={`${pokemonInfo.name}-${version}-${learnMethod}`} label={version}>
+                                <TabItem key={`${pokemonInfo.name}-${version}-${learnMethod}`} label={formatVersionTitles(version)}>
                                     <table key={`${pokemonInfo.name}-${version}-${learnMethod}-table`}>
 
                                     </table>
