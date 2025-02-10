@@ -18,7 +18,7 @@ export interface EvolutionData {
 }
 
 export interface MoveDetails {
-  move?: Move;
+  move: Move;
   level: number;
   learnMethod: string;
   versionGroup: string;

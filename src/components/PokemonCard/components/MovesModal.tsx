@@ -20,6 +20,7 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
 
     const handleClose = () => {
         onClose()
+        setSelectedMoves([]);
     }
 
     const versionGroups = [ "red-blue", "yellow", "gold-silver", "crystal", "ruby-sapphire", "emerald",
@@ -47,6 +48,43 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
         }        
     }, [isOpen])
 
+    const versionsPresent = selectedMoves.reduce((set, item) => {
+        set.add(item.versionGroup);
+        return set;
+    }, new Set()) 
+
+    const displayMoves = (version: string) => {
+        let moveList: any = [];
+        const currMoves = selectedMoves.filter(x => x.versionGroup == version).sort((a, b) => a.level - b.level);
+        currMoves.forEach(item => {
+            const moveData = item.move
+            const description = moveData.flavor_text_entries.find(x => x.language.name == "en")!;
+            moveList.push(
+                <tr key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}`}>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-method`}>
+                        {item.level}
+                    </td>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-name`}>
+                        {moveData.name}
+                    </td>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-acc`}>
+                        {moveData.accuracy ? moveData.accuracy : "--"}
+                    </td>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-pow`}>
+                        {moveData.power ? moveData.power : "--"}
+                    </td>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-pp`}>
+                        {moveData.pp}
+                    </td>
+                    <td>
+                        {description.flavor_text}
+                    </td>
+                </tr>
+            )
+        })
+
+        return moveList;
+    }
     
     return (
         <Modal
@@ -59,13 +97,20 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
                 <div>
                     <TabList activeTabIndex={0}>
                         {versionGroups.map(version => {
-                            return (
-                                <TabItem key={`${pokemonInfo.name}-${version}-${learnMethod}`} label={formatVersionTitles(version)}>
-                                    <table key={`${pokemonInfo.name}-${version}-${learnMethod}-table`}>
-
-                                    </table>
-                                </TabItem>
-                            )
+                            const inVersion = versionsPresent.has(version);
+                            if (inVersion) {
+                                return (
+                                    <TabItem key={`${pokemonInfo.name}-${version}-${learnMethod}`} label={formatVersionTitles(version)}>
+                                        <table key={`${pokemonInfo.name}-${version}-${learnMethod}-table`}>
+                                            <tbody>
+                                                {displayMoves(version)}
+                                            </tbody>
+                                        </table>
+                                    </TabItem>
+                                )
+                            } else {
+                                return <div key={`${pokemonInfo.name}-${version}-${learnMethod}`}></div>
+                            }                
                         })}
                     </TabList>
                 </div>
