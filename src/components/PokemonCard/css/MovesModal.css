@@ -1,0 +1,21 @@
+.moves-table {
+    width: 98%;
+    font-size: 14px;
+    margin: 20px auto;
+}
+
+.moves-table th {
+    width: 4%;
+    padding: 2px;
+}
+
+.moves-table th:nth-child(2) {
+    width: 10%;
+}
+
+.moves-table th:last-child {
+    width: 55%;
+}
+
+
+

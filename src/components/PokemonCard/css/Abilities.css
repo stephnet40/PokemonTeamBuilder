@@ -1,4 +1,4 @@
-table, td {
+table, th, td {
     table-layout: fixed;
     line-height: normal;
     border: 1px solid rgb(0, 0, 0);

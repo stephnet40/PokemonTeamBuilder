@@ -6,6 +6,7 @@ import { getMoveData } from "../../../utilities/apiUtilities";
 import TabList from "../layout/Tabs/TabList";
 import TabItem from "../layout/Tabs/TabItem";
 import { formatVersionTitles } from "../../../utilities/formatUtilities";
+import "../css/MovesModal.css";
 
 interface MovesModalProps {
     isOpen: boolean;
@@ -23,6 +24,7 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
         setSelectedMoves([]);
     }
 
+    const moveLabels = ["Move Name", "Type", "Cat.", "Acc.", "Pow.", "PP", "Description"]
     const versionGroups = [ "red-blue", "yellow", "gold-silver", "crystal", "ruby-sapphire", "emerald",
                             "firered-leafgreen", "diamond-pearl", "platinum", "heartgold-soulsilver",
                             "black-white", "black-2-white-2", "x-y", "omega-ruby-alpha-sapphire",
@@ -56,28 +58,38 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
     const displayMoves = (version: string) => {
         let moveList: any = [];
         const currMoves = selectedMoves.filter(x => x.versionGroup == version).sort((a, b) => a.level - b.level);
-        currMoves.forEach(item => {
-            const moveData = item.move
-            const description = moveData.flavor_text_entries.find(x => x.language.name == "en")!;
+        currMoves?.forEach((item, ind) => {
+            const moveData = item.move;
+            const description = moveData.flavor_text_entries.find(x => x.language.name == "en");
             moveList.push(
-                <tr key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}`}>
-                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-method`}>
+                <tr key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}`}>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-method`}>
                         {item.level}
                     </td>
-                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-name`}>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-name`}>
                         {moveData.name}
                     </td>
-                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-acc`}>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-type`}>
+                        <img key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-type-img`} 
+                             src={`typeSymbols/${item.move.type.name}.png`}>
+                        </img>
+                    </td>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-cat`}>
+                        <img key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-cat-img`}
+                             src={`moveCatSymbols/${moveData.damage_class?.name}.png`}>
+                        </img>
+                    </td>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-acc`}>
                         {moveData.accuracy ? moveData.accuracy : "--"}
                     </td>
-                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-pow`}>
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-pow`}>
                         {moveData.power ? moveData.power : "--"}
                     </td>
-                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-pp`}>
-                        {moveData.pp}
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-pp`}>
+                         {moveData.pp}
                     </td>
-                    <td>
-                        {description.flavor_text}
+                    <td key={`${pokemonInfo.name}-${learnMethod}-${item.move.name}-${ind}-desc`}>
+                        {description?.flavor_text ? description.flavor_text : "--"}
                     </td>
                 </tr>
             )
@@ -101,7 +113,13 @@ const MovesModal = ({isOpen, learnMethod, pokemonInfo, loadedMoves, updateLoaded
                             if (inVersion) {
                                 return (
                                     <TabItem key={`${pokemonInfo.name}-${version}-${learnMethod}`} label={formatVersionTitles(version)}>
-                                        <table key={`${pokemonInfo.name}-${version}-${learnMethod}-table`}>
+                                        <table key={`${pokemonInfo.name}-${version}-${learnMethod}-table`} className="moves-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>{learnMethod == "level-up" ? "Lv" : ""}</th>
+                                                    {moveLabels.map((label, ind) => <th key={`${label}-${ind}`}>{label}</th>)}
+                                                </tr>
+                                            </thead>
                                             <tbody>
                                                 {displayMoves(version)}
                                             </tbody>

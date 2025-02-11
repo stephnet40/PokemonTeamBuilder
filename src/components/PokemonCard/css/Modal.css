@@ -13,6 +13,10 @@ dialog.pokedex-modal {
     height: 500px;
 }
 
+dialog.moves-modal {
+    height: 800px;
+}
+
 .modal-container {
     height: 100%;
     display: flex;

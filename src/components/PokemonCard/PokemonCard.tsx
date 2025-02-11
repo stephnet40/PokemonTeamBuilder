@@ -140,7 +140,7 @@ const PokemonCard = (
 
                         <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("level-up")}}>Level Up Moves</button>
                         <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("machine")}}>TM/HM Moves</button>
-                        <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("tutor")}}>Tutor Moves</button>
+                        {/* <button onClick={() => {setMovesModalOpen(true); setMoveLearnMethod("tutor")}}>Tutor Moves</button> */}
                         <MovesModal
                             isOpen={movesModalOpen}
                             learnMethod={moveLearnMethod}
